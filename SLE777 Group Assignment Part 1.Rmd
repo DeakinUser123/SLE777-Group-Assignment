@@ -1,0 +1,13 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes
+
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
+pip <- read.table(URL)
+head(pip)
+```
+
