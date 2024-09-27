@@ -7,7 +7,17 @@ output: html_notebook
 
 ```{r}
 URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
-pip <- read.table(URL)
-head(pip)
+gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)
+head(gene_expression_raw)
 ```
+
+2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
+
+```{r}
+gene_expression <- gene_expression_raw
+gene_expression$Mean <- rowMeans(gene_expression_raw, na.rm = TRUE)
+head(gene_expression)
+```
+
+
 
