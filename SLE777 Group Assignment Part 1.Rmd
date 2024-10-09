@@ -19,5 +19,5 @@ gene_expression$Mean <- rowMeans(gene_expression_raw, na.rm = TRUE)
 head(gene_expression)
 ```
 
-simon lama
+
 
