@@ -28,3 +28,5 @@ head(sorted_gene_expression,10) #Show the first 10
 
 
 12334455
+
+5234
