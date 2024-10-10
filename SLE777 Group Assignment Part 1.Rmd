@@ -37,3 +37,7 @@ head(sorted_gene_expression,10)
 
 
 4. Determine the number of genes with a mean <10
+```{r}
+sum(sorted_gene_expression$Mean_Expression <10) 
+```
+
