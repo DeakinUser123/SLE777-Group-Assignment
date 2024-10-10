@@ -41,3 +41,22 @@ head(sorted_gene_expression,10)
 sum(sorted_gene_expression$Mean_Expression <10) 
 ```
 
+5. Make a histogram plot of the mean values
+
+```{r}
+# histogram
+hist(gene_expression$Mean_Expression, xlab = "Mean Expression", main = "Histogram of Gene Expression Means")
+```
+
+6. Import this csv file into an R object. What are the column names?
+
+```{r}
+URL= "https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+growth_data_raw <- read.csv(URL)
+colnames(growth_data_raw)
+```
+
+
+
+
+
