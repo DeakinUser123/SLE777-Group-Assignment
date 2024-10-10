@@ -3,6 +3,15 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+Load the necessary libraries:
+
+```{r}
+suppressPackageStartupMessages({
+  library("seqinr") # is a package designed to process and analyse sequence data.
+  library("R.utils") # general utilities like zip and unzip
+  library("ggplot2")
+})
+```
 1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes
 
 ```{r}
