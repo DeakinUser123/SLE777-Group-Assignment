@@ -24,15 +24,16 @@ head(gene_expression_raw)
 
 ```{r}
 gene_expression <- gene_expression_raw
-gene_expression$Mean <- rowMeans(gene_expression_raw, na.rm = TRUE)
+gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE)
 head(gene_expression)
 ```
 
 3.  List the 10 genes with the highest mean expression
 
 ```{r}
-sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
-head(sorted_gene_expression,10) #Show the first 10
+sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ]
+head(sorted_gene_expression,10) 
 ```
 
 
+4. Determine the number of genes with a mean <10

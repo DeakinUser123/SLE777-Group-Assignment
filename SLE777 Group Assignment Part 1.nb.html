@@ -1752,91 +1752,82 @@ display: none;
 
 
 <!-- rnb-text-begin -->
+<p>Load the necessary libraries:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VwcHJlc3NQYWNrYWdlU3RhcnR1cE1lc3NhZ2VzKHtcbiAgbGlicmFyeShcInNlcWluclwiKSAjIGlzIGEgcGFja2FnZSBkZXNpZ25lZCB0byBwcm9jZXNzIGFuZCBhbmFseXNlIHNlcXVlbmNlIGRhdGEuXG4gIGxpYnJhcnkoXCJSLnV0aWxzXCIpICMgZ2VuZXJhbCB1dGlsaXRpZXMgbGlrZSB6aXAgYW5kIHVuemlwXG4gIGxpYnJhcnkoXCJnZ3Bsb3QyXCIpXG59KVxuYGBgIn0= -->
+<pre class="r"><code>suppressPackageStartupMessages({
+  library(&quot;seqinr&quot;) # is a package designed to process and analyse sequence data.
+  library(&quot;R.utils&quot;) # general utilities like zip and unzip
+  library(&quot;ggplot2&quot;)
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <ol style="list-style-type: decimal">
 <li>Read in the file, making the gene identifiers the row names. Show a
 table of values for the first six genes</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuVVJMPVxcaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2doYXpraGEvQXNzZXNzbWVudDQvcmVmcy9oZWFkcy9tYWluL2dlbmVfZXhwcmVzc2lvbi50c3ZcXFxuZ2VuZV9leHByZXNzaW9uX3JhdyA8LSByZWFkLnRhYmxlKFVSTCxzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UsIGhlYWRlcj1UUlVFLCByb3cubmFtZXM9MSlcbmhlYWQoZ2VuZV9leHByZXNzaW9uX3JhdylcbmBgYFxuYGBgIn0= -->
-<pre class="r"><code>```r
-URL=\https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv\
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVVJMPVwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2doYXpraGEvQXNzZXNzbWVudDQvcmVmcy9oZWFkcy9tYWluL2dlbmVfZXhwcmVzc2lvbi50c3ZcIlxuZ2VuZV9leHByZXNzaW9uX3JhdyA8LSByZWFkLnRhYmxlKFVSTCxzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UsIGhlYWRlcj1UUlVFLCByb3cubmFtZXM9MSlcbmhlYWQoZ2VuZV9leHByZXNzaW9uX3JhdylcbmBgYCJ9 -->
+<pre class="r"><code>URL=&quot;https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv&quot;
 gene_expression_raw &lt;- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)
 head(gene_expression_raw)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjoiZGF0YS5mcmFtZSIsIm5yb3ciOjYsIm5jb2wiOjMsInN1bW1hcnkiOltdfSwicmRmIjoiVWtSWU13cFlDZ0FBQUFNQUJBRUNBQU1GQUFBQUFBVlZWRVl0T0FBQUJBSUFBQUFCQUFRQUNRQUFBQUY0QUFBREV3QUFBQU1BQUFBTkFBQUFCZ0FBQUFBQUFBQzdBQUFBQUFBQUFBRUFBQUFBQUFBQUFBQUFBQTBBQUFBR0FBQUFBQUFBQUcwQUFBQUFBQUFBQUFBQUFBQUFBQUFCQUFBQURRQUFBQVlBQUFBQUFBQUFqd0FBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQVFDQUFBQUFRQUVBQWtBQUFBRmJtRnRaWE1BQUFBUUFBQUFBd0FFQUFrQUFBQVlSMVJGV0M0eE1URTNSaTR3TWpJMkxsTk5MalZIV2xvM0FBUUFDUUFBQUJoSFZFVllMakV4TVRkR0xqQTBNall1VTAwdU5VVkhTRWtBQkFBSkFBQUFHRWRVUlZndU1URXhOMFl1TURVeU5pNVRUUzQxUlVkSVNnQUFCQUlBQUFBQkFBUUFDUUFBQUFseWIzY3VibUZ0WlhNQUFBQVFBQUFBQmdBRUFBa0FBQUFaUlU1VFJ6QXdNREF3TWpJek9UY3lMalZmUkVSWU1URk1NUUFFQUFrQUFBQVlSVTVUUnpBd01EQXdNakkzTWpNeUxqVmZWMEZUU0RkUUFBUUFDUUFBQUJ0RlRsTkhNREF3TURBeU56Z3lOamN1TVY5TlNWSTJPRFU1TFRFQUJBQUpBQUFBSFVWT1UwY3dNREF3TURJME16UTROUzQxWDAxSlVqRXpNREl0TWtoSEFBUUFDUUFBQUJsRlRsTkhNREF3TURBeU16YzJNVE11TWw5R1FVMHhNemhCQUFRQUNRQUFBQmhGVGxOSE1EQXdNREF5Tmpnd01qQXVNMTlQVWpSSE5GQUFBQVFDQUFBQUFRQUVBQWtBQUFBRlkyeGhjM01BQUFBUUFBQUFBUUFFQUFrQUFBQUtaR0YwWVM1bWNtRnRaUUFBQVA0QUFBUUNBQUFBQVFBRUFBa0FBQUFIYjNCMGFXOXVjd0FBQWhNQUFBQUdBQUFBRUFBQUFBRUFCQUFKQUFBQUFYSUFBQUFRQUFBQUFRQUVBQWtBQUFBUWRXNXVZVzFsWkMxamFIVnVheTB4TXdBQUFCQUFBQUFCQUFRQUNRQUFBQU53Ym1jQUFBQUtBQUFBQVFBQUFBRUFBQUFOQUFBQUFRQUFBQVlBQUFBTkFBQUFBUUFBQUFNQUFBUUNBQUFDL3dBQUFCQUFBQUFHQUFRQUNRQUFBQVpsYm1kcGJtVUFCQUFKQUFBQUJXeGhZbVZzQUFRQUNRQUFBQU5rWlhZQUJBQUpBQUFBRG5KdmQyNWhiV1Z6TG5CeWFXNTBBQVFBQ1FBQUFBcHliM2R6TG5SdmRHRnNBQVFBQ1FBQUFBcGpiMnh6TG5SdmRHRnNBQUFBL2dBQUFQND0ifQ== --&gt;
-
-&lt;div data-pagedtable=&quot;false&quot;&gt;
-  &lt;script data-pagedtable-source type=&quot;application/json&quot;&gt;
-{&quot;columns&quot;:[{&quot;label&quot;:[&quot;&quot;],&quot;name&quot;:[&quot;_rn_&quot;],&quot;type&quot;:[&quot;&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0226.SM.5GZZ7&quot;],&quot;name&quot;:[1],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0426.SM.5EGHI&quot;],&quot;name&quot;:[2],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0526.SM.5EGHJ&quot;],&quot;name&quot;:[3],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]}],&quot;data&quot;:[{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;_rn_&quot;:&quot;ENSG00000223972.5_DDX11L1&quot;},{&quot;1&quot;:&quot;187&quot;,&quot;2&quot;:&quot;109&quot;,&quot;3&quot;:&quot;143&quot;,&quot;_rn_&quot;:&quot;ENSG00000227232.5_WASH7P&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;1&quot;,&quot;_rn_&quot;:&quot;ENSG00000278267.1_MIR6859-1&quot;},{&quot;1&quot;:&quot;1&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;_rn_&quot;:&quot;ENSG00000243485.5_MIR1302-2HG&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;_rn_&quot;:&quot;ENSG00000237613.2_FAM138A&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;1&quot;,&quot;3&quot;:&quot;0&quot;,&quot;_rn_&quot;:&quot;ENSG00000268020.3_OR4G4P&quot;}],&quot;options&quot;:{&quot;columns&quot;:{&quot;min&quot;:{},&quot;max&quot;:[10],&quot;total&quot;:[3]},&quot;rows&quot;:{&quot;min&quot;:[10],&quot;max&quot;:[10],&quot;total&quot;:[6]},&quot;pages&quot;:{}}}
-  &lt;/script&gt;
-&lt;/div&gt;
-
-&lt;!-- rnb-frame-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZ2VuZV9leHByZXNzaW9uIDwtIGdlbmVfZXhwcmVzc2lvbl9yYXdcbmdlbmVfZXhwcmVzc2lvbiRNZWFuIDwtIHJvd01lYW5zKGdlbmVfZXhwcmVzc2lvbl9yYXcsIG5hLnJtID0gVFJVRSlcbmhlYWQoZ2VuZV9leHByZXNzaW9uKVxuYGBgXG5gYGAifQ== --&gt;
-
-```r
-```r
-gene_expression &lt;- gene_expression_raw
-gene_expression$Mean &lt;- rowMeans(gene_expression_raw, na.rm = TRUE)
-head(gene_expression)</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjoiZGF0YS5mcmFtZSIsIm5yb3ciOjYsIm5jb2wiOjQsInN1bW1hcnkiOltdfSwicmRmIjoiVWtSWU13cFlDZ0FBQUFNQUJBRUNBQU1GQUFBQUFBVlZWRVl0T0FBQUJBSUFBQUFCQUFRQUNRQUFBQUY0QUFBREV3QUFBQVFBQUFBTkFBQUFCZ0FBQUFBQUFBQzdBQUFBQUFBQUFBRUFBQUFBQUFBQUFBQUFBQTBBQUFBR0FBQUFBQUFBQUcwQUFBQUFBQUFBQUFBQUFBQUFBQUFCQUFBQURRQUFBQVlBQUFBQUFBQUFqd0FBQUFFQUFBQUFBQUFBQUFBQUFBQUFBQUFPQUFBQUJnQUFBQUFBQUFBQVFHSktxcXFxcXFzLzFWVlZWVlZWVlQvVlZWVlZWVlZWQUFBQUFBQUFBQUEvMVZWVlZWVlZWUUFBQkFJQUFBQUJBQVFBQ1FBQUFBVnVZVzFsY3dBQUFCQUFBQUFFQUFRQUNRQUFBQmhIVkVWWUxqRXhNVGRHTGpBeU1qWXVVMDB1TlVkYVdqY0FCQUFKQUFBQUdFZFVSVmd1TVRFeE4wWXVNRFF5Tmk1VFRTNDFSVWRJU1FBRUFBa0FBQUFZUjFSRldDNHhNVEUzUmk0d05USTJMbE5OTGpWRlIwaEtBQVFBQ1FBQUFBUk5aV0Z1QUFBRUFnQUFBQUVBQkFBSkFBQUFDWEp2ZHk1dVlXMWxjd0FBQUJBQUFBQUdBQVFBQ1FBQUFCbEZUbE5ITURBd01EQXlNak01TnpJdU5WOUVSRmd4TVV3eEFBUUFDUUFBQUJoRlRsTkhNREF3TURBeU1qY3lNekl1TlY5WFFWTklOMUFBQkFBSkFBQUFHMFZPVTBjd01EQXdNREkzT0RJMk55NHhYMDFKVWpZNE5Ua3RNUUFFQUFrQUFBQWRSVTVUUnpBd01EQXdNalF6TkRnMUxqVmZUVWxTTVRNd01pMHlTRWNBQkFBSkFBQUFHVVZPVTBjd01EQXdNREl6TnpZeE15NHlYMFpCVFRFek9FRUFCQUFKQUFBQUdFVk9VMGN3TURBd01ESTJPREF5TUM0elgwOVNORWMwVUFBQUJBSUFBQUFCQUFRQUNRQUFBQVZqYkdGemN3QUFBQkFBQUFBQkFBUUFDUUFBQUFwa1lYUmhMbVp5WVcxbEFBQUEvZ0FBQkFJQUFBQUJBQVFBQ1FBQUFBZHZjSFJwYjI1ekFBQUNFd0FBQUFZQUFBQVFBQUFBQVFBRUFBa0FBQUFCY2dBQUFCQUFBQUFCQUFRQUNRQUFBQkIxYm01aGJXVmtMV05vZFc1ckxURTNBQUFBRUFBQUFBRUFCQUFKQUFBQUEzQnVad0FBQUFvQUFBQUJBQUFBQVFBQUFBMEFBQUFCQUFBQUJnQUFBQTBBQUFBQkFBQUFCQUFBQkFJQUFBTC9BQUFBRUFBQUFBWUFCQUFKQUFBQUJtVnVaMmx1WlFBRUFBa0FBQUFGYkdGaVpXd0FCQUFKQUFBQUEyUmxkZ0FFQUFrQUFBQU9jbTkzYm1GdFpYTXVjSEpwYm5RQUJBQUpBQUFBQ25KdmQzTXVkRzkwWVd3QUJBQUpBQUFBQ21OdmJITXVkRzkwWVd3QUFBRCtBQUFBL2c9PSJ9 --&gt;
-
-&lt;div data-pagedtable=&quot;false&quot;&gt;
-  &lt;script data-pagedtable-source type=&quot;application/json&quot;&gt;
-{&quot;columns&quot;:[{&quot;label&quot;:[&quot;&quot;],&quot;name&quot;:[&quot;_rn_&quot;],&quot;type&quot;:[&quot;&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0226.SM.5GZZ7&quot;],&quot;name&quot;:[1],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0426.SM.5EGHI&quot;],&quot;name&quot;:[2],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]},{&quot;label&quot;:[&quot;GTEX.1117F.0526.SM.5EGHJ&quot;],&quot;name&quot;:[3],&quot;type&quot;:[&quot;int&quot;],&quot;align&quot;:[&quot;right&quot;]},{&quot;label&quot;:[&quot;Mean&quot;],&quot;name&quot;:[4],&quot;type&quot;:[&quot;dbl&quot;],&quot;align&quot;:[&quot;right&quot;]}],&quot;data&quot;:[{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;4&quot;:&quot;0.0000000&quot;,&quot;_rn_&quot;:&quot;ENSG00000223972.5_DDX11L1&quot;},{&quot;1&quot;:&quot;187&quot;,&quot;2&quot;:&quot;109&quot;,&quot;3&quot;:&quot;143&quot;,&quot;4&quot;:&quot;146.3333333&quot;,&quot;_rn_&quot;:&quot;ENSG00000227232.5_WASH7P&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;1&quot;,&quot;4&quot;:&quot;0.3333333&quot;,&quot;_rn_&quot;:&quot;ENSG00000278267.1_MIR6859-1&quot;},{&quot;1&quot;:&quot;1&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;4&quot;:&quot;0.3333333&quot;,&quot;_rn_&quot;:&quot;ENSG00000243485.5_MIR1302-2HG&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;0&quot;,&quot;3&quot;:&quot;0&quot;,&quot;4&quot;:&quot;0.0000000&quot;,&quot;_rn_&quot;:&quot;ENSG00000237613.2_FAM138A&quot;},{&quot;1&quot;:&quot;0&quot;,&quot;2&quot;:&quot;1&quot;,&quot;3&quot;:&quot;0&quot;,&quot;4&quot;:&quot;0.3333333&quot;,&quot;_rn_&quot;:&quot;ENSG00000268020.3_OR4G4P&quot;}],&quot;options&quot;:{&quot;columns&quot;:{&quot;min&quot;:{},&quot;max&quot;:[10],&quot;total&quot;:[4]},&quot;rows&quot;:{&quot;min&quot;:[10],&quot;max&quot;:[10],&quot;total&quot;:[6]},&quot;pages&quot;:{}}}
-  &lt;/script&gt;
-&lt;/div&gt;
-
-&lt;!-- rnb-frame-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-3.  List the 10 genes with the highest mean expression
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydGVkX2dlbmVfZXhwcmVzc2lvbiA8LSBnZW5lX2V4cHJlc3Npb25bb3JkZXIoLWdlbmVfZXhwcmVzc2lvbiRNZWFuX0V4cHJlc3Npb24pLCBdICNVc2luZyB0aGUgb3JkZXIgZnVuY3Rpb24sIHNvcnQgdGhlIE1lYW4gZXhwcmVzc2lvbiBpbiBkZWNyZWFzaW5nIG9yZGVyXG5oZWFkKHNvcnRlZF9nZW5lX2V4cHJlc3Npb24sMTApICNTaG93IHRoZSBmaXJzdCAxMFxuYGBgIn0= --&gt;
-
-```r
-sorted_gene_expression &lt;- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
-head(sorted_gene_expression,10) #Show the first 10</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbNiDDlyAzXSJdfX0sInJkZiI6IlVrUllNd3BZQ2dBQUFBTUFCQUVDQUFNRkFBQUFBQVZWVkVZdE9BQUFCQUlBQUFBQkFBUUFDUUFBQUFGNEFBQURFd0FBQUFNQUFBQU5BQUFBQmdBQUFBQUFBQUM3QUFBQUFBQUFBQUVBQUFBQUFBQUFBQUFBQUEwQUFBQUdBQUFBQUFBQUFHMEFBQUFBQUFBQUFBQUFBQUFBQUFBQkFBQUFEUUFBQUFZQUFBQUFBQUFBandBQUFBRUFBQUFBQUFBQUFBQUFBQUFBQUFRQ0FBQUFBUUFFQUFrQUFBQUZibUZ0WlhNQUFBQVFBQUFBQXdBRUFBa0FBQUFZUjFSRldDNHhNVEUzUmk0d01qSTJMbE5OTGpWSFdsbzNBQVFBQ1FBQUFCaEhWRVZZTGpFeE1UZEdMakEwTWpZdVUwMHVOVVZIU0VrQUJBQUpBQUFBR0VkVVJWZ3VNVEV4TjBZdU1EVXlOaTVUVFM0MVJVZElTZ0FBQkFJQUFBQUJBQVFBQ1FBQUFBbHliM2N1Ym1GdFpYTUFBQUFRQUFBQUJnQUVBQWtBQUFBWlJVNVRSekF3TURBd01qSXpPVGN5TGpWZlJFUllNVEZNTVFBRUFBa0FBQUFZUlU1VFJ6QXdNREF3TWpJM01qTXlMalZmVjBGVFNEZFFBQVFBQ1FBQUFCdEZUbE5ITURBd01EQXlOemd5TmpjdU1WOU5TVkkyT0RVNUxURUFCQUFKQUFBQUhVVk9VMGN3TURBd01ESTBNelE0TlM0MVgwMUpVakV6TURJdE1raEhBQVFBQ1FBQUFCbEZUbE5ITURBd01EQXlNemMyTVRNdU1sOUdRVTB4TXpoQkFBUUFDUUFBQUJoRlRsTkhNREF3TURBeU5qZ3dNakF1TTE5UFVqUkhORkFBQUFRQ0FBQUFBUUFFQUFrQUFBQUZZMnhoYzNNQUFBQVFBQUFBQVFBRUFBa0FBQUFLWkdGMFlTNW1jbUZ0WlFBQUFQNEFBQVFDQUFBQUFRQUVBQWtBQUFBSGIzQjBhVzl1Y3dBQUFoTUFBQUFHQUFBQUVBQUFBQUVBQkFBSkFBQUFBWElBQUFBUUFBQUFBUUFFQUFrQUFBQVBkVzV1WVcxbFpDMWphSFZ1YXkweUFBQUFFQUFBQUFFQUJBQUpBQUFBQTNCdVp3QUFBQW9BQUFBQkFBQUFBUUFBQUEwQUFBQUJBQUFBQmdBQUFBMEFBQUFCQUFBQUF3QUFCQUlBQUFML0FBQUFFQUFBQUFZQUJBQUpBQUFBQm1WdVoybHVaUUFFQUFrQUFBQUZiR0ZpWld3QUJBQUpBQUFBQTJSbGRnQUVBQWtBQUFBT2NtOTNibUZ0WlhNdWNISnBiblFBQkFBSkFBQUFDbkp2ZDNNdWRHOTBZV3dBQkFBSkFBQUFDbU52YkhNdWRHOTBZV3dBQUFEK0FBQUEvZz09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["GTEX.1117F.0226.SM.5GZZ7"],"name":[1],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0426.SM.5EGHI"],"name":[2],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0526.SM.5EGHJ"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"0","2":"0","3":"0","_rn_":"ENSG00000223972.5_DDX11L1"},{"1":"187","2":"109","3":"143","_rn_":"ENSG00000227232.5_WASH7P"},{"1":"0","2":"0","3":"1","_rn_":"ENSG00000278267.1_MIR6859-1"},{"1":"1","2":"0","3":"0","_rn_":"ENSG00000243485.5_MIR1302-2HG"},{"1":"0","2":"0","3":"0","_rn_":"ENSG00000237613.2_FAM138A"},{"1":"0","2":"1","3":"0","_rn_":"ENSG00000268020.3_OR4G4P"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<ol start="2" style="list-style-type: decimal">
+<li>Make a new column which is the mean of the other columns. Show a
+table of values for the first six genes.</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2VuZV9leHByZXNzaW9uIDwtIGdlbmVfZXhwcmVzc2lvbl9yYXdcbmdlbmVfZXhwcmVzc2lvbiRNZWFuX0V4cHJlc3Npb24gPC0gcm93TWVhbnMoZ2VuZV9leHByZXNzaW9uX3JhdywgbmEucm0gPSBUUlVFKVxuaGVhZChnZW5lX2V4cHJlc3Npb24pXG5gYGAifQ== -->
+<pre class="r"><code>gene_expression &lt;- gene_expression_raw
+gene_expression$Mean_Expression &lt;- rowMeans(gene_expression_raw, na.rm = TRUE)
+head(gene_expression)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6NCwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbNiDDlyA0XSJdfX0sInJkZiI6IlVrUllNd3BZQ2dBQUFBTUFCQUVDQUFNRkFBQUFBQVZWVkVZdE9BQUFCQUlBQUFBQkFBUUFDUUFBQUFGNEFBQURFd0FBQUFRQUFBQU5BQUFBQmdBQUFBQUFBQUM3QUFBQUFBQUFBQUVBQUFBQUFBQUFBQUFBQUEwQUFBQUdBQUFBQUFBQUFHMEFBQUFBQUFBQUFBQUFBQUFBQUFBQkFBQUFEUUFBQUFZQUFBQUFBQUFBandBQUFBRUFBQUFBQUFBQUFBQUFBQUFBQUFBT0FBQUFCZ0FBQUFBQUFBQUFRR0pLcXFxcXFxcy8xVlZWVlZWVlZUL1ZWVlZWVlZWVkFBQUFBQUFBQUFBLzFWVlZWVlZWVlFBQUJBSUFBQUFCQUFRQUNRQUFBQVZ1WVcxbGN3QUFBQkFBQUFBRUFBUUFDUUFBQUJoSFZFVllMakV4TVRkR0xqQXlNall1VTAwdU5VZGFXamNBQkFBSkFBQUFHRWRVUlZndU1URXhOMFl1TURReU5pNVRUUzQxUlVkSVNRQUVBQWtBQUFBWVIxUkZXQzR4TVRFM1JpNHdOVEkyTGxOTkxqVkZSMGhLQUFRQUNRQUFBQTlOWldGdVgwVjRjSEpsYzNOcGIyNEFBQVFDQUFBQUFRQUVBQWtBQUFBSmNtOTNMbTVoYldWekFBQUFFQUFBQUFZQUJBQUpBQUFBR1VWT1UwY3dNREF3TURJeU16azNNaTQxWDBSRVdERXhUREVBQkFBSkFBQUFHRVZPVTBjd01EQXdNREl5TnpJek1pNDFYMWRCVTBnM1VBQUVBQWtBQUFBYlJVNVRSekF3TURBd01qYzRNalkzTGpGZlRVbFNOamcxT1MweEFBUUFDUUFBQUIxRlRsTkhNREF3TURBeU5ETTBPRFV1TlY5TlNWSXhNekF5TFRKSVJ3QUVBQWtBQUFBWlJVNVRSekF3TURBd01qTTNOakV6TGpKZlJrRk5NVE00UVFBRUFBa0FBQUFZUlU1VFJ6QXdNREF3TWpZNE1ESXdMak5mVDFJMFJ6UlFBQUFFQWdBQUFBRUFCQUFKQUFBQUJXTnNZWE56QUFBQUVBQUFBQUVBQkFBSkFBQUFDbVJoZEdFdVpuSmhiV1VBQUFEK0FBQUVBZ0FBQUFFQUJBQUpBQUFBQjI5d2RHbHZibk1BQUFJVEFBQUFCZ0FBQUJBQUFBQUJBQVFBQ1FBQUFBRnlBQUFBRUFBQUFBRUFCQUFKQUFBQUQzVnVibUZ0WldRdFkyaDFibXN0TlFBQUFCQUFBQUFCQUFRQUNRQUFBQU53Ym1jQUFBQUtBQUFBQVFBQUFBRUFBQUFOQUFBQUFRQUFBQVlBQUFBTkFBQUFBUUFBQUFRQUFBUUNBQUFDL3dBQUFCQUFBQUFHQUFRQUNRQUFBQVpsYm1kcGJtVUFCQUFKQUFBQUJXeGhZbVZzQUFRQUNRQUFBQU5rWlhZQUJBQUpBQUFBRG5KdmQyNWhiV1Z6TG5CeWFXNTBBQVFBQ1FBQUFBcHliM2R6TG5SdmRHRnNBQVFBQ1FBQUFBcGpiMnh6TG5SdmRHRnNBQUFBL2dBQUFQND0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["GTEX.1117F.0226.SM.5GZZ7"],"name":[1],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0426.SM.5EGHI"],"name":[2],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0526.SM.5EGHJ"],"name":[3],"type":["int"],"align":["right"]},{"label":["Mean_Expression"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"0","3":"0","4":"0.0000000","_rn_":"ENSG00000223972.5_DDX11L1"},{"1":"187","2":"109","3":"143","4":"146.3333333","_rn_":"ENSG00000227232.5_WASH7P"},{"1":"0","2":"0","3":"1","4":"0.3333333","_rn_":"ENSG00000278267.1_MIR6859-1"},{"1":"1","2":"0","3":"0","4":"0.3333333","_rn_":"ENSG00000243485.5_MIR1302-2HG"},{"1":"0","2":"0","3":"0","4":"0.0000000","_rn_":"ENSG00000237613.2_FAM138A"},{"1":"0","2":"1","3":"0","4":"0.3333333","_rn_":"ENSG00000268020.3_OR4G4P"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ol start="3" style="list-style-type: decimal">
+<li>List the 10 genes with the highest mean expression</li>
+</ol>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29ydGVkX2dlbmVfZXhwcmVzc2lvbiA8LSBnZW5lX2V4cHJlc3Npb25bb3JkZXIoLWdlbmVfZXhwcmVzc2lvbiRNZWFuX0V4cHJlc3Npb24pLCBdXG5oZWFkKHNvcnRlZF9nZW5lX2V4cHJlc3Npb24sMTApIFxuYGBgIn0= -->
+<pre class="r"><code>sorted_gene_expression &lt;- gene_expression[order(-gene_expression$Mean_Expression), ]
+head(sorted_gene_expression,10) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MTAsIm5jb2wiOjQsInN1bW1hcnkiOnsiRGVzY3JpcHRpb24iOlsiZGYgWzEwIMOXIDRdIl19fSwicmRmIjoiVWtSWU13cFlDZ0FBQUFNQUJBRUNBQU1GQUFBQUFBVlZWRVl0T0FBQUJBSUFBQUFCQUFRQUNRQUFBQUY0QUFBREV3QUFBQVFBQUFBTkFBQUFDZ0FFRS9JQUJDc2tBQVBScFFBRHVJMEFBaWcrQUFIdzJnQUNia2NBQnhnL0FBSDNXZ0FFMk1vQUFBQU5BQUFBQ2dBUXo5TUFEeUtUQUEvajRBQUx5MllBQ3FHTEFBbTlBUUFJVENvQUFKbmtBQWhTVUFBQW1wVUFBQUFOQUFBQUNnQURWeXNBQkR4OEFBTm55Z0FDOWZBQUFrNStBQUlvTHdBQ1NEd0FCS3VXQUFIZndBQUZMWk1BQUFBT0FBQUFDa0VnSjBxcXFxcXJRUjlpN3FxcXFxdEJIdEcrcXFxcXEwRVlvb1FBQUFBQVFSUWdYcXFxcXF0QkVuSzRBQUFBQUVFUldPYXFxcXFyUVJCODlxcXFxcXRCRURjNEFBQUFBRUVNVjlxcXFxcXJBQUFFQWdBQUFBRUFCQUFKQUFBQUJXNWhiV1Z6QUFBQUVBQUFBQVFBQkFBSkFBQUFHRWRVUlZndU1URXhOMFl1TURJeU5pNVRUUzQxUjFwYU53QUVBQWtBQUFBWVIxUkZXQzR4TVRFM1JpNHdOREkyTGxOTkxqVkZSMGhKQUFRQUNRQUFBQmhIVkVWWUxqRXhNVGRHTGpBMU1qWXVVMDB1TlVWSFNFb0FCQUFKQUFBQUQwMWxZVzVmUlhod2NtVnpjMmx2YmdBQUJBSUFBQUFCQUFRQUNRQUFBQWx5YjNjdWJtRnRaWE1BQUFBUUFBQUFDZ0FFQUFrQUFBQVlSVTVUUnpBd01EQXdNVGs0T0RBMExqSmZUVlF0UTA4eEFBUUFDUUFBQUJoRlRsTkhNREF3TURBeE9UZzRPRFl1TWw5TlZDMU9SRFFBQkFBSkFBQUFHRVZPVTBjd01EQXdNREU1T0Rrek9DNHlYMDFVTFVOUE13QUVBQWtBQUFBWVJVNVRSekF3TURBd01UazRPRGc0TGpKZlRWUXRUa1F4QUFRQUNRQUFBQmxGVGxOSE1EQXdNREF4T1RnNE9Ua3VNbDlOVkMxQlZGQTJBQVFBQ1FBQUFCaEZUbE5ITURBd01EQXhPVGczTWpjdU1sOU5WQzFEV1VJQUJBQUpBQUFBR0VWT1UwY3dNREF3TURFNU9EYzJNeTR6WDAxVUxVNUVNZ0FFQUFrQUFBQVhSVTVUUnpBd01EQXdNakV4TkRRMUxqRXhYMGRRV0RNQUJBQUpBQUFBR0VWT1UwY3dNREF3TURFNU9EY3hNaTR4WDAxVUxVTlBNZ0FFQUFrQUFBQVpSVTVUUnpBd01EQXdNVFUyTlRBNExqRTNYMFZGUmpGQk1RQUFCQUlBQUFBQkFBUUFDUUFBQUFWamJHRnpjd0FBQUJBQUFBQUJBQVFBQ1FBQUFBcGtZWFJoTG1aeVlXMWxBQUFBL2dBQUJBSUFBQUFCQUFRQUNRQUFBQWR2Y0hScGIyNXpBQUFDRXdBQUFBWUFBQUFRQUFBQUFRQUVBQWtBQUFBQmNnQUFBQkFBQUFBQkFBUUFDUUFBQUE5MWJtNWhiV1ZrTFdOb2RXNXJMVFlBQUFBUUFBQUFBUUFFQUFrQUFBQURjRzVuQUFBQUNnQUFBQUVBQUFBQkFBQUFEUUFBQUFFQUFBQUtBQUFBRFFBQUFBRUFBQUFFQUFBRUFnQUFBdjhBQUFBUUFBQUFCZ0FFQUFrQUFBQUdaVzVuYVc1bEFBUUFDUUFBQUFWc1lXSmxiQUFFQUFrQUFBQURaR1YyQUFRQUNRQUFBQTV5YjNkdVlXMWxjeTV3Y21sdWRBQUVBQWtBQUFBS2NtOTNjeTUwYjNSaGJBQUVBQWtBQUFBS1kyOXNjeTUwYjNSaGJBQUFBUDRBQUFEKyJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["GTEX.1117F.0226.SM.5GZZ7"],"name":[1],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0426.SM.5EGHI"],"name":[2],"type":["int"],"align":["right"]},{"label":["GTEX.1117F.0526.SM.5EGHJ"],"name":[3],"type":["int"],"align":["right"]},{"label":["Mean_Expression"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"267250","2":"1101779","3":"218923","4":"529317.3","_rn_":"ENSG00000198804.2_MT-CO1"},{"1":"273188","2":"991891","3":"277628","4":"514235.7","_rn_":"ENSG00000198886.2_MT-ND4"},{"1":"250277","2":"1041376","3":"223178","4":"504943.7","_rn_":"ENSG00000198938.2_MT-CO3"},{"1":"243853","2":"772966","3":"194032","4":"403617.0","_rn_":"ENSG00000198888.2_MT-ND1"},{"1":"141374","2":"696715","3":"151166","4":"329751.7","_rn_":"ENSG00000198899.2_MT-ATP6"},{"1":"127194","2":"638209","3":"141359","4":"302254.0","_rn_":"ENSG00000198727.2_MT-CYB"},{"1":"159303","2":"543786","3":"149564","4":"284217.7","_rn_":"ENSG00000198763.3_MT-ND2"},{"1":"464959","2":"39396","3":"306070","4":"270141.7","_rn_":"ENSG00000211445.11_GPX3"},{"1":"128858","2":"545360","3":"122816","4":"265678.0","_rn_":"ENSG00000198712.1_MT-CO2"},{"1":"317642","2":"39573","3":"339347","4":"232187.3","_rn_":"ENSG00000156508.17_EEF1A1"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[10]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ol start="4" style="list-style-type: decimal">
+<li>Determine the number of genes with a mean &lt;10</li>
+</ol>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKMS4gUmVhZCBpbiB0aGUgZmlsZSwgbWFraW5nIHRoZSBnZW5lIGlkZW50aWZpZXJzIHRoZSByb3cgbmFtZXMuIFNob3cgYSB0YWJsZSBvZiB2YWx1ZXMgZm9yIHRoZSBmaXJzdCBzaXggZ2VuZXMKCmBgYHtyfQpVUkw9Imh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9naGF6a2hhL0Fzc2Vzc21lbnQ0L3JlZnMvaGVhZHMvbWFpbi9nZW5lX2V4cHJlc3Npb24udHN2IgpnZW5lX2V4cHJlc3Npb25fcmF3IDwtIHJlYWQudGFibGUoVVJMLHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSwgaGVhZGVyPVRSVUUsIHJvdy5uYW1lcz0xKQpoZWFkKGdlbmVfZXhwcmVzc2lvbl9yYXcpCmBgYAoKMi4gTWFrZSBhIG5ldyBjb2x1bW4gd2hpY2ggaXMgdGhlIG1lYW4gb2YgdGhlIG90aGVyIGNvbHVtbnMuIFNob3cgYSB0YWJsZSBvZiB2YWx1ZXMgZm9yIHRoZSBmaXJzdCBzaXggZ2VuZXMuCgpgYGB7cn0KZ2VuZV9leHByZXNzaW9uIDwtIGdlbmVfZXhwcmVzc2lvbl9yYXcKZ2VuZV9leHByZXNzaW9uJE1lYW4gPC0gcm93TWVhbnMoZ2VuZV9leHByZXNzaW9uX3JhdywgbmEucm0gPSBUUlVFKQpoZWFkKGdlbmVfZXhwcmVzc2lvbikKYGBgCgozLiAgTGlzdCB0aGUgMTAgZ2VuZXMgd2l0aCB0aGUgaGlnaGVzdCBtZWFuIGV4cHJlc3Npb24KCmBgYHtyfQpzb3J0ZWRfZ2VuZV9leHByZXNzaW9uIDwtIGdlbmVfZXhwcmVzc2lvbltvcmRlcigtZ2VuZV9leHByZXNzaW9uJE1lYW5fRXhwcmVzc2lvbiksIF0gI1VzaW5nIHRoZSBvcmRlciBmdW5jdGlvbiwgc29ydCB0aGUgTWVhbiBleHByZXNzaW9uIGluIGRlY3JlYXNpbmcgb3JkZXIKaGVhZChzb3J0ZWRfZ2VuZV9leHByZXNzaW9uLDEwKSAjU2hvdyB0aGUgZmlyc3QgMTAKYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKTG9hZCB0aGUgbmVjZXNzYXJ5IGxpYnJhcmllczoKCmBgYHtyfQpzdXBwcmVzc1BhY2thZ2VTdGFydHVwTWVzc2FnZXMoewogIGxpYnJhcnkoInNlcWluciIpICMgaXMgYSBwYWNrYWdlIGRlc2lnbmVkIHRvIHByb2Nlc3MgYW5kIGFuYWx5c2Ugc2VxdWVuY2UgZGF0YS4KICBsaWJyYXJ5KCJSLnV0aWxzIikgIyBnZW5lcmFsIHV0aWxpdGllcyBsaWtlIHppcCBhbmQgdW56aXAKICBsaWJyYXJ5KCJnZ3Bsb3QyIikKfSkKYGBgCjEuIFJlYWQgaW4gdGhlIGZpbGUsIG1ha2luZyB0aGUgZ2VuZSBpZGVudGlmaWVycyB0aGUgcm93IG5hbWVzLiBTaG93IGEgdGFibGUgb2YgdmFsdWVzIGZvciB0aGUgZmlyc3Qgc2l4IGdlbmVzCgpgYGB7cn0KVVJMPSJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vZ2hhemtoYS9Bc3Nlc3NtZW50NC9yZWZzL2hlYWRzL21haW4vZ2VuZV9leHByZXNzaW9uLnRzdiIKZ2VuZV9leHByZXNzaW9uX3JhdyA8LSByZWFkLnRhYmxlKFVSTCxzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UsIGhlYWRlcj1UUlVFLCByb3cubmFtZXM9MSkKaGVhZChnZW5lX2V4cHJlc3Npb25fcmF3KQpgYGAKCjIuIE1ha2UgYSBuZXcgY29sdW1uIHdoaWNoIGlzIHRoZSBtZWFuIG9mIHRoZSBvdGhlciBjb2x1bW5zLiBTaG93IGEgdGFibGUgb2YgdmFsdWVzIGZvciB0aGUgZmlyc3Qgc2l4IGdlbmVzLgoKYGBge3J9CmdlbmVfZXhwcmVzc2lvbiA8LSBnZW5lX2V4cHJlc3Npb25fcmF3CmdlbmVfZXhwcmVzc2lvbiRNZWFuX0V4cHJlc3Npb24gPC0gcm93TWVhbnMoZ2VuZV9leHByZXNzaW9uX3JhdywgbmEucm0gPSBUUlVFKQpoZWFkKGdlbmVfZXhwcmVzc2lvbikKYGBgCgozLiAgTGlzdCB0aGUgMTAgZ2VuZXMgd2l0aCB0aGUgaGlnaGVzdCBtZWFuIGV4cHJlc3Npb24KCmBgYHtyfQpzb3J0ZWRfZ2VuZV9leHByZXNzaW9uIDwtIGdlbmVfZXhwcmVzc2lvbltvcmRlcigtZ2VuZV9leHByZXNzaW9uJE1lYW5fRXhwcmVzc2lvbiksIF0KaGVhZChzb3J0ZWRfZ2VuZV9leHByZXNzaW9uLDEwKSAKYGBgCgoKNC4gRGV0ZXJtaW5lIHRoZSBudW1iZXIgb2YgZ2VuZXMgd2l0aCBhIG1lYW4gPDEw</div>
 
 
 
