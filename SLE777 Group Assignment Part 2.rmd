@@ -33,31 +33,32 @@ c. Reading
 
 ```{r}
 cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa")
-cds_Cbaratii <- seqinr::read.fasta("clostridium_cds.fa")
+cds_Cbaratii <- seqinr::read.fasta("clostridium_cds.fa") #Reads the uncompressed FASTA file containing coding sequences into R
 ```
 
 d. number of coding sequences
 
 ```{r}
 length(cds_ecoli)
-length(cds_Cbaratii)
+length(cds_Cbaratii) #Determines the number of coding sequences (CDS)
 ```
 
 2. How much coding DNA is there in total for these two organisms?
 
-a. Ecoli
+a. E. coli
 
 ```{r}
-count(unlist(cds_ecoli),1)
-sum(count(unlist(cds_ecoli),1))
+count(unlist(cds_ecoli),1) # Counts how many times the value '1' occurs in the unlisted coding sequences of E. coli
+sum(count(unlist(cds_ecoli),1)) # Calculates the total of '1' occurrences in the unlisted E. coli coding sequences
 ```
 
-b. Clostridium
+b. C. baratii
 
 ```{r}
-count(unlist(cds_Cbaratii),1)
-sum(count(unlist(cds_Cbaratii),1))
+count(unlist(cds_Cbaratii),1)  # Counts how many times the value '1' occurs in the unlisted coding sequences of C. baratii
+sum(count(unlist(cds_Cbaratii),1)) # Calculates the total of '1' occurrences in the unlisted C. baratii coding sequences
 ```
+
 
 
 

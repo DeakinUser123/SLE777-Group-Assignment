@@ -15,30 +15,30 @@ suppressPackageStartupMessages({
 1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes
 
 ```{r}
-URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"
-gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"  
+gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)  #Reading the URL and formatting it correctly
 head(gene_expression_raw)
 ```
 
 2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
 
 ```{r}
-gene_expression <- gene_expression_raw
-gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE)
+gene_expression <- gene_expression_raw #Create a new data set to modify, leave the original
+gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE) #Finding the means of the rows, remove the empty values
 head(gene_expression)
 ```
 
 3.  List the 10 genes with the highest mean expression
 
 ```{r}
-sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ]
-head(sorted_gene_expression,10) 
+sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
+head(sorted_gene_expression,10) #Show the first 10
 ```
 
 
 4. Determine the number of genes with a mean <10
 ```{r}
-sum(sorted_gene_expression$Mean_Expression <10) 
+sum(sorted_gene_expression$Mean_Expression <10)  #Use sum function which counts the number of TRUE expressions, each row with Mean_Expression less than 10 will be TRUE
 ```
 
 5. Make a histogram plot of the mean values
