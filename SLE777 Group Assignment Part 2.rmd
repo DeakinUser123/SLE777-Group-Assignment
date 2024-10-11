@@ -59,7 +59,7 @@ count(unlist(cds_Cbaratii),1)  # Counts how many times the value '1' occurs in t
 sum(count(unlist(cds_Cbaratii),1)) # Calculates the total of '1' occurrences in the unlisted C. baratii coding sequences
 ```
 
-
+3. Calculate the length of all coding sequences in these two organisms. Make a boxplot of coding sequence length in these organisms. What is the mean and median coding sequence length of these two organisms? Describe any differences between the two organisms.
 
 
 
