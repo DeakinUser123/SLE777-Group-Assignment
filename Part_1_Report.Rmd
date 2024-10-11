@@ -7,44 +7,54 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### Question 1
+To approach this, we have a tsv file, first column and row are the names, so we must account for that using header and row.names. The tsv is read and assigned to a variable for easy usage.
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"  
+gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)  #Reading the URL and formatting it correctly
+head(gene_expression_raw) #Show the first 6 genes in the tbale
+```
 
-### 1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes
-
-
-
-### 2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
-
-
-
-
-### 3. List the 10 genes with the highest mean expression
-
-
-
-### 4. Determine the number of genes with a mean <10
-
-
-### 5. Make a histogram plot of the mean values and include it into your report.
+### Question 2
+To approach this, we create a new column called "Mean_Expression" in "gene_expression" and  assign the mean values to this column. 
+```{r}
+gene_expression <- gene_expression_raw #Create a new data set to modify, leave the original
+gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE) #Finding the means of the rows, remove the empty values
+head(gene_expression)
+```
 
 
-### 6. Import this csv file into an R object. What are the column names?
+### Question 3
 
-
-### 7. Calculate the mean and standard deviation of tree circumference at the start and end of the study at both sites
-
-
-
-
-
-### 8. Make a box plot of tree circumference at the start and end of the study at both sites.
+To approach this, we used the order function, and use - prefix to indicate decreasing order of Mean_Expression, then took the first 10 using head. The 10 genes are summarised in the table below:
+```{r}
+sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
+head(sorted_gene_expression, 10) #Show the first 10
+```
 
 
 
 
-### 9. Calculate the mean growth over the last 10 years at each site
+### Question 4
 
 
-### 10. Use the t.test to estimate the p-value that the 10 year growth is different at the two sites.
+### Question 5
+
+
+### Question 6
+
+
+### Question 7
+
+
+### Question 8
+
+
+
+### Question 9
+
+
+### Question 10
 
 
 
