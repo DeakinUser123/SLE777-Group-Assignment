@@ -3,5 +3,70 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+load the necessary libraries
+```{r}
+library("seqinr") # is a package designed to process and analyse sequence data.
+  library("R.utils") # general utilities like zip and unzip
+```
+
+1. Download the whole set of coding DNA sequences for E. coli and your organism of interest. How many coding sequences are present in these organisms? Present this in the form of a table. Describe any differences between the two organisms. 
+
+a. Ecoli
+
+```{r}
+URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+download.file(URL,destfile="ecoli_cds.fa.gz")
+gunzip("ecoli_cds.fa.gz")
+list.files()
+```
+
+b. organism of interest
+
+```{r}
+URL="https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz"
+download.file(URL,destfile="clostridium_cds.fa.gz")
+gunzip("clostridium_cds.fa.gz")
+list.files()
+```
+
+c. Reading
+
+```{r}
+cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa")
+cds_Cbaratii <- seqinr::read.fasta("clostridium_cds.fa")
+```
+
+d. number of coding sequences
+
+```{r}
+length(cds_ecoli)
+length(cds_Cbaratii)
+```
+
+2. How much coding DNA is there in total for these two organisms?
+
+a. Ecoli
+
+```{r}
+count(unlist(cds_ecoli),1)
+sum(count(unlist(cds_ecoli),1))
+```
+
+b. Clostridium
+
+```{r}
+count(unlist(cds_Cbaratii),1)
+sum(count(unlist(cds_Cbaratii),1))
+```
+
+
+
+
+
+
+
+
+
+
 
 
