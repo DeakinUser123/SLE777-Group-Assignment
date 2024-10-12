@@ -109,7 +109,35 @@ mtext("Figure 1: Boxplot of total coding sequence length for C.baratii (blue) an
 ```
 
 
+4. Calculate the frequency of DNA bases in the total coding sequences for both organisms. Perform the same calculation for the total protein sequence. Create bar plots for nucleotide and amino acid frequency. Describe any differences between the two organisms.
 
+```{r}
+count(unlist(cds_ecoli),1)
+count(unlist(cds_Cbaratii),1)
+```
+
+
+a. E. coli
+
+
+```{r}
+ecoli_dna_composition <- count(unlist(cds_ecoli),1)
+barplot(ecoli_dna_composition,xlab="Nucleotides",ylab="Frequency", main="E.coli nucleotide composition", names.arg=toupper(names(ecoli_dna_composition)))
+```
+
+b. C. baratii
+
+```{r}
+cbaratii_dna_composition <- count(unlist(cds_Cbaratii),1)
+barplot(cbaratii_dna_composition,xlab="Nucleotides",ylab="Frequency", main="C.baratii nucleotide composition",names.arg=toupper(names(ecoli_dna_composition)))
+```
+
+
+translation to amino acids
+```{r}
+prot_ecoli <- lapply(cds_ecoli,translate)
+prot_cbaratii <- lapply(cds_Cbaratii,translate)
+```
 
 
 
