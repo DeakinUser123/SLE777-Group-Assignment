@@ -50,7 +50,7 @@ a. E. coli
 
 ```{r}
 seqinr::count(unlist(cds_ecoli),1) # Counts how many nucleotides A,T,G and C in the entirety of E. coli coding sequences
-sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total nucleotide frequency in E.coli coding sequences
+sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total nucleotide frequency in E. coli coding sequences
 ```
 
 b. C. baratii
@@ -62,12 +62,27 @@ sum(seqinr::count(unlist(cds_Cbaratii),1)) # Calculates the total nucleotide fre
 Create a table for the results of E.coli and C.baratii 
 ```{r}
 Coding_DNA_Table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1))  ,sum(seqinr::count(unlist(cds_Cbaratii),1)))) # Defining the table for total coding sequences for each organism 
+Coding_DNA_Table
 ```
 
 
 3. Calculate the length of all coding sequences in these two organisms. Make a boxplot of coding sequence length in these organisms. What is the mean and median coding sequence length of these two organisms? Describe any differences between the two organisms.
 
+```{r}
+len_ecoli <- as.numeric(summary(cds_ecoli)[,1]) # Gets the length of all sequences from the first column
+len_Cbaratii <- as.numeric(summary(cds_Cbaratii)[,1]) # Gets the length of all sequences from the first column
 
+#Getting the mean and median length for each organism 
+mean(len_ecoli) # Base R Mean Function
+median(len_ecoli) # Base R Median Function
+
+mean(len_Cbaratii)
+median(len_Cbaratii)
+
+#Printing the mean and median lengths
+print("The mean coding sequence length of E.coli is 938.5534 and the median is 831")
+print("The mean coding sequence length of C.baratii is 920.7707 and the median is 792")
+```
 
 
 
