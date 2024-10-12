@@ -466,3 +466,49 @@ ggplot(cbaratii_kmer_5, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 ```
+2.4 To create a bar plots:
+
+One for DNA base frequency (A, T, G, C).
+One for amino acid frequency (20 standard amino acids).
+
+2.5 Identify codon usage:
+Codons are 3-nucleotide sequences in DNA that encode specific amino acids. For each coding sequence, we need to:
+
+Split the sequence into triplets (codons).
+Count the frequency of each codon.
+Group the codons by their corresponding amino acids to observe patterns.
+
+Calculate Codon Usage Bias
+We will calculate the codon usage bias using various metrics, such as:
+
+RSCU (Relative Synonymous Codon Usage): This shows the frequency of a codon relative to other synonymous codons encoding the same amino acid. An RSCU value > 1 indicates a codon is preferred, while an RSCU < 1 indicates it is underrepresented.
+Effective Number of Codons (ENC): This measures how much the codon usage deviates from uniform usage. Values close to 20 indicate high bias (preference for specific codons), while values closer to 61 suggest more uniform codon usage.
+GC Content at the 3rd Codon Position (GC3): This measures the proportion of G and C bases at the third position of codons, which can give insights into the organism's codon bias.
+
+Create a chart:
+A heatmap of the RSCU values for each organism.
+A bar plot comparing the overall codon usage distribution between the two organisms.
+A chart for GC3 content distribution for each organism.
+
+2.6 Generate Protein k-mers
+k-mers are short subsequences of length k (in this case, lengths of 3, 4, or 5 amino acids).
+For each protein sequence in both organisms, extract all possible k-mers for the lengths of interest (k = 3, 4, 5).
+
+Create Visualizations
+To visualize the k-mer distribution:
+
+Bar plots for the top 10 most over- and under-represented k-mers in Clostridium baratii and E. coli.
+A heatmap showing the degree of over- or under-representation of k-mers in both organisms.
+
+Comparison with E. coli
+Once we have identified the over- and under-represented k-mers for Clostridium baratii, we can:
+
+Extract the same k-mers from E. coli protein sequences.
+Compute the frequencies and calculate their over- or under-representation in E. coli.
+Compare the k-mer representation between the two organisms to see if there are similarities or significant differences.
+
+Analyze Differences
+
+Whether the same k-mers are over- or under-represented in both organisms.
+Biological implications, such as whether specific over-represented k-mers may indicate functional protein motifs or structural preferences in Clostridium baratii that differ from E. coli.
+
