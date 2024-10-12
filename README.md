@@ -3,13 +3,16 @@ This project is for SLE777 at Deakin University.
 
 #### -- Project Status: [Active]
 
-## Project Intro/Objective
-The purpose of this project is for collaborators to understand and analyse data.
+## Project Overview and Objectives
 
-Part 1 involves analysis of gene expression data in a tsv format, as well as data visualisations to draw conclusions about frequency of gene expression. Furthermore It also involves data filtering and analysis of Tree Circumference data across 20 years to draw conclusions between sites of trees. 
+The main aim of this project is to assist collaborators in understanding and analyzing biological data more effectively.
+
+Part 1 focuses on the analysis of gene expression data in TSV format. This section will include visualizations to facilitate insights into the frequency of gene expression. Additionally, we will filter and analyze Tree Circumference data collected over 20 years to uncover differences across various tree sites.
 
 
-Part 2 involves comparing gene sequences, nucleotide frequencies and amino acid biases for E. coli and C. baratii. This also involves comparisons between the two, using data visualisation to draw conclusions. 
+Part 2 involves a comparative analysis of gene sequences, nucleotide frequencies, and amino acid biases between E. coli and C. baratii. This part will also highlight comparisons between the two organisms, employing data visualizations to support our findings and conclusions.
+
+
 
 
 ### Methods Used
