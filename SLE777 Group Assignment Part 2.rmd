@@ -49,19 +49,19 @@ sequences_table # View the table
 a. E. coli
 
 ```{r}
-seqinr::count(unlist(cds_ecoli),1) # Counts how many times the value '1' occurs in the unlisted coding sequences of E. coli
-sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total of '1' occurrences in the unlisted E. coli coding sequences
+seqinr::count(unlist(cds_ecoli),1) # Counts how many nucleotides A,T,G and C in the entirety of E. coli coding sequences
+sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total nucleotide frequency in E.coli coding sequences
 ```
 
 b. C. baratii
 
 ```{r}
-seqinr::count(unlist(cds_Cbaratii),1)  # Counts how many times the value '1' occurs in the unlisted coding sequences of C. baratii
-sum(seqinr::count(unlist(cds_Cbaratii),1)) # Calculates the total of '1' occurrences in the unlisted C. baratii coding sequences.
+seqinr::count(unlist(cds_Cbaratii),1)  # Counts how many nucleotides A,T,G and C in the entirety of C. baratii coding sequences
+sum(seqinr::count(unlist(cds_Cbaratii),1)) # Calculates the total nucleotide frequency in C. baratii coding sequences 
 ```
 Create a table for the results of E.coli and C.baratii 
 ```{r}
-Coding_DNA_Table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1)) ,sum(seqinr::count(unlist(cds_Cbaratii),1))))
+Coding_DNA_Table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1))  ,sum(seqinr::count(unlist(cds_Cbaratii),1)))) # Defining the table for total coding sequences for each organism 
 ```
 
 

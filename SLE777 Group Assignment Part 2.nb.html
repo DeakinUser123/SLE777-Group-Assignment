@@ -1755,10 +1755,33 @@ display: none;
 <p>load the necessary libraries</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInNlcWluclwiKSAjIGlzIGEgcGFja2FnZSBkZXNpZ25lZCB0byBwcm9jZXNzIGFuZCBhbmFseXNlIHNlcXVlbmNlIGRhdGEuXG4gIGxpYnJhcnkoXCJSLnV0aWxzXCIpICMgZ2VuZXJhbCB1dGlsaXRpZXMgbGlrZSB6aXAgYW5kIHVuemlwXG5gYGAifQ== -->
-<pre class="r"><code>library(&quot;seqinr&quot;) # is a package designed to process and analyse sequence data.
-  library(&quot;R.utils&quot;) # general utilities like zip and unzip</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInNlcWluclwiKSAjIGlzIGEgcGFja2FnZSBkZXNpZ25lZCB0byBwcm9jZXNzIGFuZCBhbmFseXNlIHNlcXVlbmNlIGRhdGEuXG5gYGAifQ== -->
+<pre class="r"><code>library(&quot;seqinr&quot;) # is a package designed to process and analyse sequence data.</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYc2VxaW5y4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6Ui5vb+KAmTpcblxuICAgIGdldE5hbWVcbiJ9 -->
+<pre><code>
+Attaching package: ‘seqinr’
+
+The following object is masked from ‘package:R.oo’:
+
+    getName</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcIlIudXRpbHNcIikgIyBnZW5lcmFsIHV0aWxpdGllcyBsaWtlIHppcCBhbmQgdW56aXBcbmBgYCJ9 -->
+<pre class="r"><code>library(&quot;R.utils&quot;) # general utilities like zip and unzip</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUi51dGlscyB2Mi4xMi4zICgyMDIzLTExLTE4IDAxOjAwOjAyIFVUQykgc3VjY2Vzc2Z1bGx5IGxvYWRlZC4gU2VlID9SLnV0aWxzIGZvciBoZWxwLlxuXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYUi51dGlsc+KAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnV0aWxz4oCZOlxuXG4gICAgdGltZXN0YW1wXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpiYXNl4oCZOlxuXG4gICAgY2F0LCBjb21tYW5kQXJncywgZ2V0T3B0aW9uLCBpc09wZW4sIG51bGxmaWxlLCBwYXJzZSwgd2FybmluZ3NcbiJ9 -->
+<pre><code>R.utils v2.12.3 (2023-11-18 01:00:02 UTC) successfully loaded. See ?R.utils for help.
+
+Attaching package: ‘R.utils’
+
+The following object is masked from ‘package:utils’:
+
+    timestamp
+
+The following objects are masked from ‘package:base’:
+
+    cat, commandArgs, getOption, isOpen, nullfile, parse, warnings</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol style="list-style-type: decimal">
@@ -1768,13 +1791,13 @@ organisms? Present this in the form of a table. Describe any differences
 between the two organisms.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>Ecoli</li>
+<li>Downloading E.coli data</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVVJMPVwiaHR0cDovL2Z0cC5lbnNlbWJsZ2Vub21lcy5vcmcvcHViL2JhY3RlcmlhL3JlbGVhc2UtNTMvZmFzdGEvYmFjdGVyaWFfMF9jb2xsZWN0aW9uL2VzY2hlcmljaGlhX2NvbGlfc3RyX2tfMTJfc3Vic3RyX21nMTY1NV9nY2FfMDAwMDA1ODQ1L2Nkcy9Fc2NoZXJpY2hpYV9jb2xpX3N0cl9rXzEyX3N1YnN0cl9tZzE2NTVfZ2NhXzAwMDAwNTg0NS5BU001ODR2Mi5jZHMuYWxsLmZhLmd6XCJcbmRvd25sb2FkLmZpbGUoVVJMLGRlc3RmaWxlPVwiZWNvbGlfY2RzLmZhLmd6XCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVVJMPVwiaHR0cDovL2Z0cC5lbnNlbWJsZ2Vub21lcy5vcmcvcHViL2JhY3RlcmlhL3JlbGVhc2UtNTMvZmFzdGEvYmFjdGVyaWFfMF9jb2xsZWN0aW9uL2VzY2hlcmljaGlhX2NvbGlfc3RyX2tfMTJfc3Vic3RyX21nMTY1NV9nY2FfMDAwMDA1ODQ1L2Nkcy9Fc2NoZXJpY2hpYV9jb2xpX3N0cl9rXzEyX3N1YnN0cl9tZzE2NTVfZ2NhXzAwMDAwNTg0NS5BU001ODR2Mi5jZHMuYWxsLmZhLmd6XCJcbmRvd25sb2FkLmZpbGUoVVJMLGRlc3RmaWxlPVwiZWNvbGlfY2RzLmZhLmd6XCIpICMgRG93bmxvYWRzIHRoZSBFLmNvbGkgZmlsZSBmcm9tIHRoZSBVUkxcbmBgYCJ9 -->
 <pre class="r"><code>URL=&quot;http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz&quot;
-download.file(URL,destfile=&quot;ecoli_cds.fa.gz&quot;)</code></pre>
+download.file(URL,destfile=&quot;ecoli_cds.fa.gz&quot;) # Downloads the E.coli file from the URL</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoidHJ5aW5nIFVSTCAnaHR0cDovL2Z0cC5lbnNlbWJsZ2Vub21lcy5vcmcvcHViL2JhY3RlcmlhL3JlbGVhc2UtNTMvZmFzdGEvYmFjdGVyaWFfMF9jb2xsZWN0aW9uL2VzY2hlcmljaGlhX2NvbGlfc3RyX2tfMTJfc3Vic3RyX21nMTY1NV9nY2FfMDAwMDA1ODQ1L2Nkcy9Fc2NoZXJpY2hpYV9jb2xpX3N0cl9rXzEyX3N1YnN0cl9tZzE2NTVfZ2NhXzAwMDAwNTg0NS5BU001ODR2Mi5jZHMuYWxsLmZhLmd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCAxNDU2NDY2IGJ5dGVzICgxLjQgTUIpXG49PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PVxuZG93bmxvYWRlZCAxLjQgTUJcbiJ9 -->
 <pre><code>trying URL &#39;http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz&#39;
@@ -1782,8 +1805,8 @@ Content type &#39;application/x-gzip&#39; length 1456466 bytes (1.4 MB)
 ==================================================
 downloaded 1.4 MB</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3VuemlwKFwiZWNvbGlfY2RzLmZhLmd6XCIpXG5gYGAifQ== -->
-<pre class="r"><code>gunzip(&quot;ecoli_cds.fa.gz&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3VuemlwKFwiZWNvbGlfY2RzLmZhLmd6XCIpICMgVW56aXBzIHRoZSBFLmNvbGkgZ3ogZmlsZVxuYGBgIn0= -->
+<pre class="r"><code>gunzip(&quot;ecoli_cds.fa.gz&quot;) # Unzips the E.coli gz file</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZGVjb21wcmVzc0ZpbGUuZGVmYXVsdChmaWxlbmFtZSA9IGZpbGVuYW1lLCAuLi4sIGV4dCA9IGV4dCwgRlVOID0gRlVOKSA6IFxuICBGaWxlIGFscmVhZHkgZXhpc3RzOiBlY29saV9jZHMuZmFcbiJ9 -->
 <pre><code>Error in decompressFile.default(filename = filename, ..., ext = ext, FUN = FUN) : 
@@ -1792,13 +1815,13 @@ downloaded 1.4 MB</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="2" style="list-style-type: lower-alpha">
-<li>organism of interest</li>
+<li>Downloading organism of interest (C. baratii) data</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVVJMPVwiaHR0cHM6Ly9mdHAuZW5zZW1ibGdlbm9tZXMuZWJpLmFjLnVrL3B1Yi9iYWN0ZXJpYS9yZWxlYXNlLTU5L2Zhc3RhL2JhY3RlcmlhXzE0X2NvbGxlY3Rpb24vY2xvc3RyaWRpdW1fYmFyYXRpaV9nY2FfMDAxNDA1NzU1L2Nkcy9DbG9zdHJpZGl1bV9iYXJhdGlpX2djYV8wMDE0MDU3NTUuMTQyMDdfN183OS5jZHMuYWxsLmZhLmd6XCJcbmRvd25sb2FkLmZpbGUoVVJMLGRlc3RmaWxlPVwiY2xvc3RyaWRpdW1fY2RzLmZhLmd6XCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVVJMPVwiaHR0cHM6Ly9mdHAuZW5zZW1ibGdlbm9tZXMuZWJpLmFjLnVrL3B1Yi9iYWN0ZXJpYS9yZWxlYXNlLTU5L2Zhc3RhL2JhY3RlcmlhXzE0X2NvbGxlY3Rpb24vY2xvc3RyaWRpdW1fYmFyYXRpaV9nY2FfMDAxNDA1NzU1L2Nkcy9DbG9zdHJpZGl1bV9iYXJhdGlpX2djYV8wMDE0MDU3NTUuMTQyMDdfN183OS5jZHMuYWxsLmZhLmd6XCJcbmRvd25sb2FkLmZpbGUoVVJMLGRlc3RmaWxlPVwiY2xvc3RyaWRpdW1fY2RzLmZhLmd6XCIpICMgRG93bmxvYWRzIHRoZSBDLmJhcmF0aWkgZmlsZSBmcm9tIHRoZSBVUkxcbmBgYCJ9 -->
 <pre class="r"><code>URL=&quot;https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz&quot;
-download.file(URL,destfile=&quot;clostridium_cds.fa.gz&quot;)</code></pre>
+download.file(URL,destfile=&quot;clostridium_cds.fa.gz&quot;) # Downloads the C.baratii file from the URL</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoidHJ5aW5nIFVSTCAnaHR0cHM6Ly9mdHAuZW5zZW1ibGdlbm9tZXMuZWJpLmFjLnVrL3B1Yi9iYWN0ZXJpYS9yZWxlYXNlLTU5L2Zhc3RhL2JhY3RlcmlhXzE0X2NvbGxlY3Rpb24vY2xvc3RyaWRpdW1fYmFyYXRpaV9nY2FfMDAxNDA1NzU1L2Nkcy9DbG9zdHJpZGl1bV9iYXJhdGlpX2djYV8wMDE0MDU3NTUuMTQyMDdfN183OS5jZHMuYWxsLmZhLmd6J1xuQ29udGVudCB0eXBlICdhcHBsaWNhdGlvbi94LWd6aXAnIGxlbmd0aCA5OTI1NzYgYnl0ZXMgKDk2OSBLQilcbj09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09XG5kb3dubG9hZGVkIDk2OSBLQlxuIn0= -->
 <pre><code>trying URL &#39;https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz&#39;
@@ -1806,8 +1829,8 @@ Content type &#39;application/x-gzip&#39; length 992576 bytes (969 KB)
 ==================================================
 downloaded 969 KB</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3VuemlwKFwiY2xvc3RyaWRpdW1fY2RzLmZhLmd6XCIpXG5gYGAifQ== -->
-<pre class="r"><code>gunzip(&quot;clostridium_cds.fa.gz&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3VuemlwKFwiY2xvc3RyaWRpdW1fY2RzLmZhLmd6XCIpICMgVW56aXBzIHRoZSBDLmJhcmF0aWkgZ3ogZmlsZVxuYGBgIn0= -->
+<pre class="r"><code>gunzip(&quot;clostridium_cds.fa.gz&quot;) # Unzips the C.baratii gz file</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZGVjb21wcmVzc0ZpbGUuZGVmYXVsdChmaWxlbmFtZSA9IGZpbGVuYW1lLCAuLi4sIGV4dCA9IGV4dCwgRlVOID0gRlVOKSA6IFxuICBGaWxlIGFscmVhZHkgZXhpc3RzOiBjbG9zdHJpZGl1bV9jZHMuZmFcbiJ9 -->
 <pre><code>Error in decompressFile.default(filename = filename, ..., ext = ext, FUN = FUN) : 
@@ -1816,33 +1839,33 @@ downloaded 969 KB</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="3" style="list-style-type: lower-alpha">
-<li>Reading</li>
+<li>Reading the data for both organisms</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2RzX2Vjb2xpIDwtIHNlcWlucjo6cmVhZC5mYXN0YShcImVjb2xpX2Nkcy5mYVwiKVxuY2RzX0NiYXJhdGlpIDwtIHNlcWlucjo6cmVhZC5mYXN0YShcImNsb3N0cmlkaXVtX2Nkcy5mYVwiKVxuYGBgIn0= -->
-<pre class="r"><code>cds_ecoli &lt;- seqinr::read.fasta(&quot;ecoli_cds.fa&quot;)
-cds_Cbaratii &lt;- seqinr::read.fasta(&quot;clostridium_cds.fa&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1JlYWRpbmcgdGhlIHVuY29tcHJlc3NlZCBGQVNUQSBmaWxlIGNvbnRhaW5pbmcgY29kaW5nIHNlcXVlbmNlcyBpbnRvIFIgZm9yIGJvdGggb3JnYW5pc21zXG5jZHNfZWNvbGkgPC0gc2VxaW5yOjpyZWFkLmZhc3RhKFwiZWNvbGlfY2RzLmZhXCIpIFxuY2RzX0NiYXJhdGlpIDwtIHNlcWlucjo6cmVhZC5mYXN0YShcImNsb3N0cmlkaXVtX2Nkcy5mYVwiKSBcbmBgYCJ9 -->
+<pre class="r"><code>#Reading the uncompressed FASTA file containing coding sequences into R for both organisms
+cds_ecoli &lt;- seqinr::read.fasta(&quot;ecoli_cds.fa&quot;) 
+cds_Cbaratii &lt;- seqinr::read.fasta(&quot;clostridium_cds.fa&quot;) </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="4" style="list-style-type: lower-alpha">
-<li>number of coding sequences</li>
+<li>Finding the number of coding sequences</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGVuZ3RoKGNkc19lY29saSlcbmBgYCJ9 -->
-<pre class="r"><code>length(cds_ecoli)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2VxdWVuY2VzX3RhYmxlIDwtIGRhdGEuZnJhbWUoT3JnYW5pc209IGMoXCJFc2NoZXJpY2hpYSBjb2xpXCIsIFwiQ2xvc3RyaWRpdW0gYmFyYXRpaVwiKSwgTnVtX0NvZGluZ19TZXF1ZW5jZXM9IGMobGVuZ3RoKGNkc19lY29saSksbGVuZ3RoKGNkc19DYmFyYXRpaSkpKSAjIENyZWF0ZXMgdGhlIHRhYmxlIHdpdGggdGhlIHRvdGFsIGxlbmd0aCBkYXRhXG5zZXF1ZW5jZXNfdGFibGUgIyBWaWV3IHRoZSB0YWJsZVxuYGBgIn0= -->
+<pre class="r"><code>sequences_table &lt;- data.frame(Organism= c(&quot;Escherichia coli&quot;, &quot;Clostridium baratii&quot;), Num_Coding_Sequences= c(length(cds_ecoli),length(cds_Cbaratii))) # Creates the table with the total length data
+sequences_table # View the table</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQyMzlcbiJ9 -->
-<pre><code>[1] 4239</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGVuZ3RoKGNkc19DYmFyYXRpaSlcbmBgYCJ9 -->
-<pre class="r"><code>length(cds_Cbaratii)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI5MzFcbiJ9 -->
-<pre><code>[1] 2931</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6Miwic3VtbWFyeSI6W119LCJyZGYiOiJVa1JZTXdwWUNnQUFBQU1BQkFFQ0FBTUZBQUFBQUFWVlZFWXRPQUFBQkFJQUFBQUJBQVFBQ1FBQUFBRjRBQUFERXdBQUFBSUFBQUFRQUFBQUFnQUVBQWtBQUFBUVJYTmphR1Z5YVdOb2FXRWdZMjlzYVFBRUFBa0FBQUFUUTJ4dmMzUnlhV1JwZFcwZ1ltRnlZWFJwYVFBQUFBMEFBQUFDQUFBUWp3QUFDM01BQUFRQ0FBQUFBUUFFQUFrQUFBQUZibUZ0WlhNQUFBQVFBQUFBQWdBRUFBa0FBQUFJVDNKbllXNXBjMjBBQkFBSkFBQUFGRTUxYlY5RGIyUnBibWRmVTJWeGRXVnVZMlZ6QUFBRUFnQUFBQUVBQkFBSkFBQUFDWEp2ZHk1dVlXMWxjd0FBQUEwQUFBQUNBQUFBQVFBQUFBSUFBQVFDQUFBQUFRQUVBQWtBQUFBRlkyeGhjM01BQUFBUUFBQUFBUUFFQUFrQUFBQUtaR0YwWVM1bWNtRnRaUUFBQVA0QUFBUUNBQUFBQVFBRUFBa0FBQUFIYjNCMGFXOXVjd0FBQWhNQUFBQUdBQUFBRUFBQUFBRUFCQUFKQUFBQUFYSUFBQUFRQUFBQUFRQUVBQWtBQUFBUGRXNXVZVzFsWkMxamFIVnVheTAxQUFBQUVBQUFBQUVBQkFBSkFBQUFBM0J1WndBQUFBb0FBQUFCQUFBQUFBQUFBQTBBQUFBQkFBQUFBZ0FBQUEwQUFBQUJBQUFBQWdBQUJBSUFBQUwvQUFBQUVBQUFBQVlBQkFBSkFBQUFCbVZ1WjJsdVpRQUVBQWtBQUFBRmJHRmlaV3dBQkFBSkFBQUFBMlJsZGdBRUFBa0FBQUFPY205M2JtRnRaWE11Y0hKcGJuUUFCQUFKQUFBQUNuSnZkM011ZEc5MFlXd0FCQUFKQUFBQUNtTnZiSE11ZEc5MFlXd0FBQUQrQUFBQS9nPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Organism"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Num_Coding_Sequences"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Escherichia coli","2":"4239"},{"1":"Clostridium baratii","2":"2931"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="2" style="list-style-type: decimal">
@@ -1853,16 +1876,16 @@ cds_Cbaratii &lt;- seqinr::read.fasta(&quot;clostridium_cds.fa&quot;)</code></pr
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY291bnQodW5saXN0KGNkc19lY29saSksMSlcbmBgYCJ9 -->
-<pre class="r"><code>count(unlist(cds_ecoli),1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2VxaW5yOjpjb3VudCh1bmxpc3QoY2RzX2Vjb2xpKSwxKSAjIENvdW50cyBob3cgbWFueSB0aW1lcyB0aGUgdmFsdWUgJzEnIG9jY3VycyBpbiB0aGUgdW5saXN0ZWQgY29kaW5nIHNlcXVlbmNlcyBvZiBFLiBjb2xpXG5gYGAifQ== -->
+<pre class="r"><code>seqinr::count(unlist(cds_ecoli),1) # Counts how many times the value &#39;1&#39; occurs in the unlisted coding sequences of E. coli</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG4gICAgICBhICAgICAgIGMgICAgICAgZyAgICAgICB0IFxuIDk1NTc2OCAgOTc3NTk0IDEwODg1MDEgIDk1NjY2NSBcbiJ9 -->
 <pre><code>
       a       c       g       t 
  955768  977594 1088501  956665 </code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGNvdW50KHVubGlzdChjZHNfZWNvbGkpLDEpKVxuYGBgIn0= -->
-<pre class="r"><code>sum(count(unlist(cds_ecoli),1))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKHNlcWlucjo6Y291bnQodW5saXN0KGNkc19lY29saSksMSkpICMgQ2FsY3VsYXRlcyB0aGUgdG90YWwgb2YgJzEnIG9jY3VycmVuY2VzIGluIHRoZSB1bmxpc3RlZCBFLiBjb2xpIGNvZGluZyBzZXF1ZW5jZXNcbmBgYCJ9 -->
+<pre class="r"><code>sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total of &#39;1&#39; occurrences in the unlisted E. coli coding sequences</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM5Nzg1MjhcbiJ9 -->
 <pre><code>[1] 3978528</code></pre>
@@ -1874,25 +1897,39 @@ cds_Cbaratii &lt;- seqinr::read.fasta(&quot;clostridium_cds.fa&quot;)</code></pr
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY291bnQodW5saXN0KGNkc19DYmFyYXRpaSksMSlcbmBgYCJ9 -->
-<pre class="r"><code>count(unlist(cds_Cbaratii),1)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2VxaW5yOjpjb3VudCh1bmxpc3QoY2RzX0NiYXJhdGlpKSwxKSAgIyBDb3VudHMgaG93IG1hbnkgdGltZXMgdGhlIHZhbHVlICcxJyBvY2N1cnMgaW4gdGhlIHVubGlzdGVkIGNvZGluZyBzZXF1ZW5jZXMgb2YgQy4gYmFyYXRpaVxuYGBgIn0= -->
+<pre class="r"><code>seqinr::count(unlist(cds_Cbaratii),1)  # Counts how many times the value &#39;1&#39; occurs in the unlisted coding sequences of C. baratii</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG4gICAgICBhICAgICAgIGMgICAgICAgZyAgICAgICB0IFxuMTA5ODE4OSAgMjgzODY2ICA0OTAzNDQgIDgyNjM4MCBcbiJ9 -->
 <pre><code>
       a       c       g       t 
 1098189  283866  490344  826380 </code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGNvdW50KHVubGlzdChjZHNfQ2JhcmF0aWkpLDEpKVxuYGBgIn0= -->
-<pre class="r"><code>sum(count(unlist(cds_Cbaratii),1))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKHNlcWlucjo6Y291bnQodW5saXN0KGNkc19DYmFyYXRpaSksMSkpICMgQ2FsY3VsYXRlcyB0aGUgdG90YWwgb2YgJzEnIG9jY3VycmVuY2VzIGluIHRoZSB1bmxpc3RlZCBDLiBiYXJhdGlpIGNvZGluZyBzZXF1ZW5jZXMuXG5gYGAifQ== -->
+<pre class="r"><code>sum(seqinr::count(unlist(cds_Cbaratii),1)) # Calculates the total of &#39;1&#39; occurrences in the unlisted C. baratii coding sequences.</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI2OTg3NzlcbiJ9 -->
 <pre><code>[1] 2698779</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Create a table for the results of E.coli and C.baratii</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQ29kaW5nX0ROQV9UYWJsZSA8LSBkYXRhLmZyYW1lKE9yZ2FuaXNtPSBjKFwiRXNjaGVyaWNoaWEgY29saVwiLCBcIkNsb3N0cmlkaXVtIGJhcmF0aWlcIiksIFRvdGFsX0NvZGluZ19ETkE9IGMoc3VtKHNlcWlucjo6Y291bnQodW5saXN0KGNkc19lY29saSksMSkpICxzdW0oc2VxaW5yOjpjb3VudCh1bmxpc3QoY2RzX0NiYXJhdGlpKSwxKSkpKVxuYGBgIn0= -->
+<pre class="r"><code>Coding_DNA_Table &lt;- data.frame(Organism= c(&quot;Escherichia coli&quot;, &quot;Clostridium baratii&quot;), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1)) ,sum(seqinr::count(unlist(cds_Cbaratii),1))))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate the length of all coding sequences in these two organisms.
+Make a boxplot of coding sequence length in these organisms. What is the
+mean and median coding sequence length of these two organisms? Describe
+any differences between the two organisms.</li>
+</ol>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKbG9hZCB0aGUgbmVjZXNzYXJ5IGxpYnJhcmllcwpgYGB7cn0KbGlicmFyeSgic2VxaW5yIikgIyBpcyBhIHBhY2thZ2UgZGVzaWduZWQgdG8gcHJvY2VzcyBhbmQgYW5hbHlzZSBzZXF1ZW5jZSBkYXRhLgogIGxpYnJhcnkoIlIudXRpbHMiKSAjIGdlbmVyYWwgdXRpbGl0aWVzIGxpa2UgemlwIGFuZCB1bnppcApgYGAKCjEuIERvd25sb2FkIHRoZSB3aG9sZSBzZXQgb2YgY29kaW5nIEROQSBzZXF1ZW5jZXMgZm9yIEUuIGNvbGkgYW5kIHlvdXIgb3JnYW5pc20gb2YgaW50ZXJlc3QuIEhvdyBtYW55IGNvZGluZyBzZXF1ZW5jZXMgYXJlIHByZXNlbnQgaW4gdGhlc2Ugb3JnYW5pc21zPyBQcmVzZW50IHRoaXMgaW4gdGhlIGZvcm0gb2YgYSB0YWJsZS4gRGVzY3JpYmUgYW55IGRpZmZlcmVuY2VzIGJldHdlZW4gdGhlIHR3byBvcmdhbmlzbXMuIAoKYS4gRWNvbGkKCmBgYHtyfQpVUkw9Imh0dHA6Ly9mdHAuZW5zZW1ibGdlbm9tZXMub3JnL3B1Yi9iYWN0ZXJpYS9yZWxlYXNlLTUzL2Zhc3RhL2JhY3RlcmlhXzBfY29sbGVjdGlvbi9lc2NoZXJpY2hpYV9jb2xpX3N0cl9rXzEyX3N1YnN0cl9tZzE2NTVfZ2NhXzAwMDAwNTg0NS9jZHMvRXNjaGVyaWNoaWFfY29saV9zdHJfa18xMl9zdWJzdHJfbWcxNjU1X2djYV8wMDAwMDU4NDUuQVNNNTg0djIuY2RzLmFsbC5mYS5neiIKZG93bmxvYWQuZmlsZShVUkwsZGVzdGZpbGU9ImVjb2xpX2Nkcy5mYS5neiIpCmd1bnppcCgiZWNvbGlfY2RzLmZhLmd6IikKbGlzdC5maWxlcygpCmBgYAoKYi4gb3JnYW5pc20gb2YgaW50ZXJlc3QKCmBgYHtyfQpVUkw9Imh0dHBzOi8vZnRwLmVuc2VtYmxnZW5vbWVzLmViaS5hYy51ay9wdWIvYmFjdGVyaWEvcmVsZWFzZS01OS9mYXN0YS9iYWN0ZXJpYV8xNF9jb2xsZWN0aW9uL2Nsb3N0cmlkaXVtX2JhcmF0aWlfZ2NhXzAwMTQwNTc1NS9jZHMvQ2xvc3RyaWRpdW1fYmFyYXRpaV9nY2FfMDAxNDA1NzU1LjE0MjA3XzdfNzkuY2RzLmFsbC5mYS5neiIKZG93bmxvYWQuZmlsZShVUkwsZGVzdGZpbGU9ImNsb3N0cmlkaXVtX2Nkcy5mYS5neiIpCmd1bnppcCgiY2xvc3RyaWRpdW1fY2RzLmZhLmd6IikKbGlzdC5maWxlcygpCmBgYAoKYy4gUmVhZGluZwoKYGBge3J9CmNkc19lY29saSA8LSBzZXFpbnI6OnJlYWQuZmFzdGEoImVjb2xpX2Nkcy5mYSIpCmNkc19DYmFyYXRpaSA8LSBzZXFpbnI6OnJlYWQuZmFzdGEoImNsb3N0cmlkaXVtX2Nkcy5mYSIpICNSZWFkcyB0aGUgdW5jb21wcmVzc2VkIEZBU1RBIGZpbGUgY29udGFpbmluZyBjb2Rpbmcgc2VxdWVuY2VzIGludG8gUgpgYGAKCmQuIG51bWJlciBvZiBjb2Rpbmcgc2VxdWVuY2VzCgpgYGB7cn0KbGVuZ3RoKGNkc19lY29saSkKbGVuZ3RoKGNkc19DYmFyYXRpaSkgI0RldGVybWluZXMgdGhlIG51bWJlciBvZiBjb2Rpbmcgc2VxdWVuY2VzIChDRFMpCmBgYAoKMi4gSG93IG11Y2ggY29kaW5nIEROQSBpcyB0aGVyZSBpbiB0b3RhbCBmb3IgdGhlc2UgdHdvIG9yZ2FuaXNtcz8KCmEuIEUuIGNvbGkKCmBgYHtyfQpjb3VudCh1bmxpc3QoY2RzX2Vjb2xpKSwxKSAjIENvdW50cyBob3cgbWFueSB0aW1lcyB0aGUgdmFsdWUgJzEnIG9jY3VycyBpbiB0aGUgdW5saXN0ZWQgY29kaW5nIHNlcXVlbmNlcyBvZiBFLiBjb2xpCnN1bShjb3VudCh1bmxpc3QoY2RzX2Vjb2xpKSwxKSkgIyBDYWxjdWxhdGVzIHRoZSB0b3RhbCBvZiAnMScgb2NjdXJyZW5jZXMgaW4gdGhlIHVubGlzdGVkIEUuIGNvbGkgY29kaW5nIHNlcXVlbmNlcwpgYGAKCmIuIEMuIGJhcmF0aWkKCmBgYHtyfQpjb3VudCh1bmxpc3QoY2RzX0NiYXJhdGlpKSwxKSAgIyBDb3VudHMgaG93IG1hbnkgdGltZXMgdGhlIHZhbHVlICcxJyBvY2N1cnMgaW4gdGhlIHVubGlzdGVkIGNvZGluZyBzZXF1ZW5jZXMgb2YgQy4gYmFyYXRpaQpzdW0oY291bnQodW5saXN0KGNkc19DYmFyYXRpaSksMSkpICMgQ2FsY3VsYXRlcyB0aGUgdG90YWwgb2YgJzEnIG9jY3VycmVuY2VzIGluIHRoZSB1bmxpc3RlZCBDLiBiYXJhdGlpIGNvZGluZyBzZXF1ZW5jZXMKYGBgCgoKCgoKCgoKCgoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKbG9hZCB0aGUgbmVjZXNzYXJ5IGxpYnJhcmllcwpgYGB7cn0KbGlicmFyeSgic2VxaW5yIikgIyBpcyBhIHBhY2thZ2UgZGVzaWduZWQgdG8gcHJvY2VzcyBhbmQgYW5hbHlzZSBzZXF1ZW5jZSBkYXRhLgpsaWJyYXJ5KCJSLnV0aWxzIikgIyBnZW5lcmFsIHV0aWxpdGllcyBsaWtlIHppcCBhbmQgdW56aXAKYGBgCgoxLiBEb3dubG9hZCB0aGUgd2hvbGUgc2V0IG9mIGNvZGluZyBETkEgc2VxdWVuY2VzIGZvciBFLiBjb2xpIGFuZCB5b3VyIG9yZ2FuaXNtIG9mIGludGVyZXN0LiBIb3cgbWFueSBjb2Rpbmcgc2VxdWVuY2VzIGFyZSBwcmVzZW50IGluIHRoZXNlIG9yZ2FuaXNtcz8gUHJlc2VudCB0aGlzIGluIHRoZSBmb3JtIG9mIGEgdGFibGUuIERlc2NyaWJlIGFueSBkaWZmZXJlbmNlcyBiZXR3ZWVuIHRoZSB0d28gb3JnYW5pc21zLiAKCmEuIERvd25sb2FkaW5nIEUuY29saSBkYXRhCgpgYGB7cn0KVVJMPSJodHRwOi8vZnRwLmVuc2VtYmxnZW5vbWVzLm9yZy9wdWIvYmFjdGVyaWEvcmVsZWFzZS01My9mYXN0YS9iYWN0ZXJpYV8wX2NvbGxlY3Rpb24vZXNjaGVyaWNoaWFfY29saV9zdHJfa18xMl9zdWJzdHJfbWcxNjU1X2djYV8wMDAwMDU4NDUvY2RzL0VzY2hlcmljaGlhX2NvbGlfc3RyX2tfMTJfc3Vic3RyX21nMTY1NV9nY2FfMDAwMDA1ODQ1LkFTTTU4NHYyLmNkcy5hbGwuZmEuZ3oiCmRvd25sb2FkLmZpbGUoVVJMLGRlc3RmaWxlPSJlY29saV9jZHMuZmEuZ3oiKSAjIERvd25sb2FkcyB0aGUgRS5jb2xpIGZpbGUgZnJvbSB0aGUgVVJMCmd1bnppcCgiZWNvbGlfY2RzLmZhLmd6IikgIyBVbnppcHMgdGhlIEUuY29saSBneiBmaWxlCmxpc3QuZmlsZXMoKSAjIExpc3RzIGFsbCBmaWxlcyB0byBjaGVjayBpZiBpdCB3b3JrZWQKYGBgCgpiLiBEb3dubG9hZGluZyBvcmdhbmlzbSBvZiBpbnRlcmVzdCAoQy4gYmFyYXRpaSkgZGF0YQoKYGBge3J9ClVSTD0iaHR0cHM6Ly9mdHAuZW5zZW1ibGdlbm9tZXMuZWJpLmFjLnVrL3B1Yi9iYWN0ZXJpYS9yZWxlYXNlLTU5L2Zhc3RhL2JhY3RlcmlhXzE0X2NvbGxlY3Rpb24vY2xvc3RyaWRpdW1fYmFyYXRpaV9nY2FfMDAxNDA1NzU1L2Nkcy9DbG9zdHJpZGl1bV9iYXJhdGlpX2djYV8wMDE0MDU3NTUuMTQyMDdfN183OS5jZHMuYWxsLmZhLmd6Igpkb3dubG9hZC5maWxlKFVSTCxkZXN0ZmlsZT0iY2xvc3RyaWRpdW1fY2RzLmZhLmd6IikgIyBEb3dubG9hZHMgdGhlIEMuYmFyYXRpaSBmaWxlIGZyb20gdGhlIFVSTApndW56aXAoImNsb3N0cmlkaXVtX2Nkcy5mYS5neiIpICMgVW56aXBzIHRoZSBDLmJhcmF0aWkgZ3ogZmlsZQpsaXN0LmZpbGVzKCkgIyBMaXN0cyBhbGwgZmlsZXMgdG8gY2hlY2sgaWYgaXQgd29ya2VkCmBgYAoKYy4gUmVhZGluZyB0aGUgZGF0YSBmb3IgYm90aCBvcmdhbmlzbXMgCgpgYGB7cn0KI1JlYWRpbmcgdGhlIHVuY29tcHJlc3NlZCBGQVNUQSBmaWxlIGNvbnRhaW5pbmcgY29kaW5nIHNlcXVlbmNlcyBpbnRvIFIgZm9yIGJvdGggb3JnYW5pc21zCmNkc19lY29saSA8LSBzZXFpbnI6OnJlYWQuZmFzdGEoImVjb2xpX2Nkcy5mYSIpIApjZHNfQ2JhcmF0aWkgPC0gc2VxaW5yOjpyZWFkLmZhc3RhKCJjbG9zdHJpZGl1bV9jZHMuZmEiKSAKYGBgCgpkLiBGaW5kaW5nIHRoZSBudW1iZXIgb2YgY29kaW5nIHNlcXVlbmNlcwoKYGBge3J9CnNlcXVlbmNlc190YWJsZSA8LSBkYXRhLmZyYW1lKE9yZ2FuaXNtPSBjKCJFc2NoZXJpY2hpYSBjb2xpIiwgIkNsb3N0cmlkaXVtIGJhcmF0aWkiKSwgTnVtX0NvZGluZ19TZXF1ZW5jZXM9IGMobGVuZ3RoKGNkc19lY29saSksbGVuZ3RoKGNkc19DYmFyYXRpaSkpKSAjIENyZWF0ZXMgdGhlIHRhYmxlIHdpdGggdGhlIHRvdGFsIGxlbmd0aCBkYXRhCnNlcXVlbmNlc190YWJsZSAjIFZpZXcgdGhlIHRhYmxlCmBgYAoKMi4gSG93IG11Y2ggY29kaW5nIEROQSBpcyB0aGVyZSBpbiB0b3RhbCBmb3IgdGhlc2UgdHdvIG9yZ2FuaXNtcz8KCmEuIEUuIGNvbGkKCmBgYHtyfQpzZXFpbnI6OmNvdW50KHVubGlzdChjZHNfZWNvbGkpLDEpICMgQ291bnRzIGhvdyBtYW55IG51Y2xlb3RpZGVzIEEsVCxHIGFuZCBDIGluIHRoZSBlbnRpcmV0eSBvZiBFLiBjb2xpIGNvZGluZyBzZXF1ZW5jZXMKc3VtKHNlcWlucjo6Y291bnQodW5saXN0KGNkc19lY29saSksMSkpICMgQ2FsY3VsYXRlcyB0aGUgdG90YWwgbnVjbGVvdGlkZSBmcmVxdWVuY3kgaW4gRS5jb2xpIGNvZGluZyBzZXF1ZW5jZXMKYGBgCgpiLiBDLiBiYXJhdGlpCgpgYGB7cn0Kc2VxaW5yOjpjb3VudCh1bmxpc3QoY2RzX0NiYXJhdGlpKSwxKSAgIyBDb3VudHMgaG93IG1hbnkgbnVjbGVvdGlkZXMgQSxULEcgYW5kIEMgaW4gdGhlIGVudGlyZXR5IG9mIEMuIGJhcmF0aWkgY29kaW5nIHNlcXVlbmNlcwpzdW0oc2VxaW5yOjpjb3VudCh1bmxpc3QoY2RzX0NiYXJhdGlpKSwxKSkgIyBDYWxjdWxhdGVzIHRoZSB0b3RhbCBudWNsZW90aWRlIGZyZXF1ZW5jeSBpbiBDLiBiYXJhdGlpIGNvZGluZyBzZXF1ZW5jZXMgCmBgYApDcmVhdGUgYSB0YWJsZSBmb3IgdGhlIHJlc3VsdHMgb2YgRS5jb2xpIGFuZCBDLmJhcmF0aWkgCmBgYHtyfQpDb2RpbmdfRE5BX1RhYmxlIDwtIGRhdGEuZnJhbWUoT3JnYW5pc209IGMoIkVzY2hlcmljaGlhIGNvbGkiLCAiQ2xvc3RyaWRpdW0gYmFyYXRpaSIpLCBUb3RhbF9Db2RpbmdfRE5BPSBjKHN1bShzZXFpbnI6OmNvdW50KHVubGlzdChjZHNfZWNvbGkpLDEpKSAgLHN1bShzZXFpbnI6OmNvdW50KHVubGlzdChjZHNfQ2JhcmF0aWkpLDEpKSkpICMgRGVmaW5pbmcgdGhlIHRhYmxlIGZvciB0b3RhbCBjb2Rpbmcgc2VxdWVuY2VzIGZvciBlYWNoIG9yZ2FuaXNtIApgYGAKCgozLiBDYWxjdWxhdGUgdGhlIGxlbmd0aCBvZiBhbGwgY29kaW5nIHNlcXVlbmNlcyBpbiB0aGVzZSB0d28gb3JnYW5pc21zLiBNYWtlIGEgYm94cGxvdCBvZiBjb2Rpbmcgc2VxdWVuY2UgbGVuZ3RoIGluIHRoZXNlIG9yZ2FuaXNtcy4gV2hhdCBpcyB0aGUgbWVhbiBhbmQgbWVkaWFuIGNvZGluZyBzZXF1ZW5jZSBsZW5ndGggb2YgdGhlc2UgdHdvIG9yZ2FuaXNtcz8gRGVzY3JpYmUgYW55IGRpZmZlcmVuY2VzIGJldHdlZW4gdGhlIHR3byBvcmdhbmlzbXMuCgoKCgoKCgoKCgoK</div>
 
 
 
