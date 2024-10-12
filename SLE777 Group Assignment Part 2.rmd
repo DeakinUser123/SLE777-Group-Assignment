@@ -82,8 +82,31 @@ median(len_Cbaratii)
 #Printing the mean and median lengths
 print("The mean coding sequence length of E.coli is 938.5534 and the median is 831")
 print("The mean coding sequence length of C.baratii is 920.7707 and the median is 792")
+
 ```
 
+Boxplot of the coding sequence lengths
+
+```{r}
+
+# Combine lengths into a single data frame for boxplot
+lengths_data <- data.frame(
+  Length = c(len_ecoli, len_Cbaratii),
+  Organism = factor(c(rep("E.coli", length(len_ecoli)), rep("C.baratii", length(len_Cbaratii))))
+)
+
+# Now create a boxplot
+boxplot(Length ~ Organism, data = lengths_data,
+        main = "Boxplot of Coding Sequence Lengths",
+        xlab = "Organism",
+        ylab = "Length of Coding Sequences ",
+        col = c("lightblue", "lightgreen"),
+        border = "black",
+        boxwex = 0.5
+        )
+
+mtext("Figure 1: Boxplot of total coding sequence length for C.baratii (blue) and E. coli (green)", side = 1, line = 4, cex = 0.8)
+```
 
 
 
