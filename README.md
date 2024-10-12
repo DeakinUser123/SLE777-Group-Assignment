@@ -1,5 +1,5 @@
 # SLE777-Group-Assignment
-This project is for SLE777 at Deakin University.
+This project is part for the SLE777 at Deakin University.
 
 #### -- Project Status: [Active]
 
@@ -24,9 +24,9 @@ Part 2 involves a comparative analysis of gene sequences, nucleotide frequencies
 * R studio
 
 ### Libraries Required
-* Seqinr
-* ggplot2
-* R.utils
+* 'Seqinr'
+* 'ggplot2'
+* 'R.utils'
 
 
 ## Contributing Members
@@ -40,6 +40,13 @@ Part 2 involves a comparative analysis of gene sequences, nucleotide frequencies
 We can be contacted via our deakin university emails
 
 ## Project Contents
-In the repository, you will find two reports, one for each respective part, as well as an associated R notebook containing all of the code. The report details all our findings and explains our approaches to solving the problems, as well as the code 
+In this repository, you will find two reports, each highlighting a different part of our project. Alongside these, there is an R notebook that includes all the code we used. The reports provide a detailed overview of our findings and share the strategies we employed to solve the problems, along with the necessary code to reproduce our results.
+
+## Future Work
+* Potential extensions of the analysis
+* Adding new datasets to gain deeper insights
+
+
+
 
 
