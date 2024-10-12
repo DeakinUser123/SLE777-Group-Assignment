@@ -140,6 +140,39 @@ prot_cbaratii <- lapply(cds_Cbaratii,translate)
 ```
 
 
+E. coli
 
+```{r}
+prot_ecoli_all<- unlist(prot_ecoli)
+aa1 <- unique(prot_ecoli_all[prot_ecoli_all != "*"])
+amino_acid_counts_ecoli <- count(prot_ecoli_all, wordsize = 1, alphabet = aa1)
+```
 
+barplot for E. coli
 
+```{r}
+barplot(amino_acid_counts_ecoli,
+        xlab = "Amino Acids",
+        ylab = "Frequency",
+        main = "Amino Acid Composition in E.coli")
+```
+
+ C. baratii
+ 
+```{r}
+prot_cbaratii_all<- unlist(prot_cbaratii)
+aa2 <- unique(prot_cbaratii_all[prot_cbaratii_all != "*"])
+amino_acid_counts_cbaratii <- count(prot_cbaratii_all, wordsize = 1, alphabet = aa2)
+```
+ 
+ barplot for C. baratii
+ 
+```{r}
+barplot(amino_acid_counts_cbaratii,
+        xlab = "Amino Acids",
+        ylab = "Frequency",
+        main = "Amino Acid Composition in C.baratii")
+```
+
+ 
+ 
