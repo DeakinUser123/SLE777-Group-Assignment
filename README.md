@@ -40,7 +40,7 @@ Part 2 involves a comparative analysis of gene sequences, nucleotide frequencies
 We can be contacted via our deakin university emails
 
 ## Project Contents
-In this repository, you will find two reports, each highlighting a different part of our project. Alongside these, there is an R notebook that includes all the code we used. The reports provide a detailed overview of our findings and share the strategies we employed to solve the problems, along with the necessary code to reproduce our results.
+In this repository, you will find two reports named "Part_x_Report", each highlighting a different part of our project. Alongside these, there is a respective R notebook that includes all the code we used, "SLE777 Group Assignment Part 1". The reports provide a detailed overview of our findings and share the strategies we employed to solve the problems, along with the necessary code to reproduce our results.
 
 ## Future Work
 * Potential extensions of the analysis
