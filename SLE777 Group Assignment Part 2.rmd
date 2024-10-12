@@ -6,41 +6,42 @@ output: html_notebook
 load the necessary libraries
 ```{r}
 library("seqinr") # is a package designed to process and analyse sequence data.
-  library("R.utils") # general utilities like zip and unzip
+library("R.utils") # general utilities like zip and unzip
 ```
 
 1. Download the whole set of coding DNA sequences for E. coli and your organism of interest. How many coding sequences are present in these organisms? Present this in the form of a table. Describe any differences between the two organisms. 
 
-a. Ecoli
+a. Downloading E.coli data
 
 ```{r}
 URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
-download.file(URL,destfile="ecoli_cds.fa.gz")
-gunzip("ecoli_cds.fa.gz")
-list.files()
+download.file(URL,destfile="ecoli_cds.fa.gz") # Downloads the E.coli file from the URL
+gunzip("ecoli_cds.fa.gz") # Unzips the E.coli gz file
+list.files() # Lists all files to check if it worked
 ```
 
-b. organism of interest
+b. Downloading organism of interest (C. baratii) data
 
 ```{r}
 URL="https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz"
-download.file(URL,destfile="clostridium_cds.fa.gz")
-gunzip("clostridium_cds.fa.gz")
-list.files()
+download.file(URL,destfile="clostridium_cds.fa.gz") # Downloads the C.baratii file from the URL
+gunzip("clostridium_cds.fa.gz") # Unzips the C.baratii gz file
+list.files() # Lists all files to check if it worked
 ```
 
-c. Reading
+c. Reading the data for both organisms 
 
 ```{r}
-cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa")
-cds_Cbaratii <- seqinr::read.fasta("clostridium_cds.fa") #Reads the uncompressed FASTA file containing coding sequences into R
+#Reading the uncompressed FASTA file containing coding sequences into R for both organisms
+cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa") 
+cds_Cbaratii <- seqinr::read.fasta("clostridium_cds.fa") 
 ```
 
-d. number of coding sequences
+d. Finding the number of coding sequences
 
 ```{r}
-length(cds_ecoli)
-length(cds_Cbaratii) #Determines the number of coding sequences (CDS)
+sequences_table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Num_Coding_Sequences= c(length(cds_ecoli),length(cds_Cbaratii))) # Creates the table with the total length data
+sequences_table # View the table
 ```
 
 2. How much coding DNA is there in total for these two organisms?
@@ -48,16 +49,21 @@ length(cds_Cbaratii) #Determines the number of coding sequences (CDS)
 a. E. coli
 
 ```{r}
-count(unlist(cds_ecoli),1) # Counts how many times the value '1' occurs in the unlisted coding sequences of E. coli
-sum(count(unlist(cds_ecoli),1)) # Calculates the total of '1' occurrences in the unlisted E. coli coding sequences
+seqinr::count(unlist(cds_ecoli),1) # Counts how many times the value '1' occurs in the unlisted coding sequences of E. coli
+sum(seqinr::count(unlist(cds_ecoli),1)) # Calculates the total of '1' occurrences in the unlisted E. coli coding sequences
 ```
 
 b. C. baratii
 
 ```{r}
-count(unlist(cds_Cbaratii),1)  # Counts how many times the value '1' occurs in the unlisted coding sequences of C. baratii
-sum(count(unlist(cds_Cbaratii),1)) # Calculates the total of '1' occurrences in the unlisted C. baratii coding sequences.
+seqinr::count(unlist(cds_Cbaratii),1)  # Counts how many times the value '1' occurs in the unlisted coding sequences of C. baratii
+sum(seqinr::count(unlist(cds_Cbaratii),1)) # Calculates the total of '1' occurrences in the unlisted C. baratii coding sequences.
 ```
+Create a table for the results of E.coli and C.baratii 
+```{r}
+Coding_DNA_Table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1)) ,sum(seqinr::count(unlist(cds_Cbaratii),1))))
+```
+
 
 3. Calculate the length of all coding sequences in these two organisms. Make a boxplot of coding sequence length in these organisms. What is the mean and median coding sequence length of these two organisms? Describe any differences between the two organisms.
 
