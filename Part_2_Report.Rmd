@@ -28,4 +28,93 @@ suppressPackageStartupMessages({
 })
 ```
 
+### Question 1
+We used the "R.utils" library, set the file URLs, and used download.file to save them as "ecoli_cds.fa.gz" and "Cbaratii_cds.fa.gz", then unzipped using gunzip.
+
+```{r}
+# Downloading the data for E. coli, run if you do not have the files
+URL1="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+download.file(URL1,destfile="ecoli_cds.fa.gz")
+gunzip("ecoli_cds.fa.gz") # Unzips the gz file
+list.files() #Displays all the files, to see if it successfully occurred
+```
+```{r}
+# Downloading the data for C. baratii, run if you do not have the files
+URL2="https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz"
+download.file(URL2,destfile="Cbaratii_cds.fa.gz")
+gunzip("Cbaratii_cds.fa.gz") # Unzips the gz file
+list.files() #Displays all the files, to see if it successfully occurred
+```
+
+We read the FASTA files using seqinr::read.fasta and stored them in variables
+```{r}
+cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa") # Sets the read file into a variable
+cds_Cbaratii <- seqinr:: read.fasta("Cbaratii_cds.fa") # Sets the read file into a variable
+```
+To count the coding sequences, we applied length to the FASTA data and created a dataframe for comparison.
+```{r}
+sequences_table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Num_Coding_Sequences= c(length(cds_ecoli),length(cds_Cbaratii)))
+sequences_table #View the dataframe 
+```
+We found that E. coli has more coding sequences than C. baratii (4239 > 2931).
+
+### Question 2
+We created "Coding_DNA_Table", a dataframe with organisms and total coding DNA, using sum and length on unlisted sequences. Unlisting is required to do it on the entire genome.
+```{r}
+Coding_DNA_Table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Total_Coding_DNA= c(sum(seqinr::count(unlist(cds_ecoli),1)) ,sum(seqinr::count(unlist(cds_Cbaratii),1))))
+Coding_DNA_Table
+```
+E. coli has more total coding DNA than C. baratii (3978528 > 2698779)
+
+### Question 3
+
+We calculated lengths with summary, converted to numeric vectors, and stored them in a dataframe for plotting. We also calculated mean and median with the mean and median functions.
+```{r}
+len_ecoli <- as.numeric(summary(cds_ecoli)[,1]) # Gets the length of all sequences from the first column
+len_Cbaratii <- as.numeric(summary(cds_Cbaratii)[,1]) # Gets the length of all sequences from the first column
+
+#Getting the mean and median length for each organism 
+mean(len_ecoli) # Base R Mean Function
+median(len_ecoli) # Base R Median Function
+
+mean(len_Cbaratii)
+median(len_Cbaratii)
+
+#Printing the mean and median lengths
+print("The mean coding sequence length of E.coli is 938.5534 and the median is 831")
+print("The mean coding sequence length of C.baratii is 920.7707 and the median is 792")
+```
+We then plot using "boxplot" 
+
+```{r}
+
+# Combine lengths into a single data frame for boxplot
+lengths_data <- data.frame(
+  Length = c(len_ecoli, len_Cbaratii),
+  Organism = factor(c(rep("E.coli", length(len_ecoli)), rep("C.baratii", length(len_Cbaratii))))
+)
+
+# Now create a boxplot
+boxplot(Length ~ Organism, data = lengths_data,
+        main = "Boxplot of Coding Sequence Lengths",
+        xlab = "Organism",
+        ylab = "Length of Coding Sequences ",
+        col = c("lightblue", "lightgreen"),
+        border = "black",
+        boxwex = 0.5
+        )
+
+mtext("Figure 1: Boxplot of total coding sequence length for C.baratii (blue) and E. coli (green)", side = 1, line = 4, cex = 0.8)
+```
+From the boxplot, C. baratii has a lower median than E. coli. They have similar IQR, and both have many outliers. However C. baratii has outliers that are far higher.
+
+
+### Question 4
+
+
+### Question 5
+
+
+
+### Question 6
 
