@@ -1,0 +1,31 @@
+---
+title: "Part_2_Report"
+date: "2024-10-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+Install and load any necessary packages
+
+```{r}
+install.packages("seqinr")
+install.packages("R.utils")
+install.packages("ggplot2")
+```
+
+```{r}
+suppressPackageStartupMessages({
+  library("seqinr") # is a package designed to process and analyse sequence data.
+  library("R.utils") # general utilities like zip and unzip
+  library("ggplot2")
+})
+```
+
+
