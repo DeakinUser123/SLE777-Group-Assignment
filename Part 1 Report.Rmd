@@ -1,0 +1,199 @@
+---
+title: "Report Part 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Question 1
+To approach this, we have a tsv file, first column and row are the names, so we must account for that using header and row.names. The tsv is read and assigned to a variable for easy usage.
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"  
+gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)  #Reading the URL and formatting it correctly
+head(gene_expression_raw) #Show the first 6 genes in the tbale
+```
+
+### Question 2
+To approach this, we create a new column called "Mean_Expression" in "gene_expression" and  assign the mean values to this column. 
+```{r}
+gene_expression <- gene_expression_raw #Create a new data set to modify, leave the original
+gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE) #Finding the means of the rows, remove the empty values
+head(gene_expression)
+```
+
+
+### Question 3
+To approach this, we used the order function, and use - prefix to indicate decreasing order of Mean_Expression, then took the first 10 using head. The 10 genes are summarised in the table below:
+```{r}
+sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
+head(sorted_gene_expression, 10) #Show the first 10
+```
+
+### Question 4
+We first filtered genes with a mean expression less than 10, then summed the number of TRUE values.
+```{r}
+sum(sorted_gene_expression$Mean_Expression <10) #Use sum function which counts the number of TRUE expressions, each row with Mean_Expression less than 10 will be TRUE
+```
+We found that A total of 35,988 genes have a mean expression less than 10.
+### Question 5
+
+We used hist to plot the frequency of mean expression values. Due to magnitude differences, we applied a log transformation (log(mean expression + 1)) to better visualize trends.
+
+```{r}
+# Log transformation of Mean values, avoiding log(0) issues
+log_means <- log(gene_expression$Mean_Expression + 1)
+# Create a histogram of the log-transformed Mean values
+hist(log_means, 
+     main = "Histogram of Log-transformed Mean Gene Expression Values", 
+     xlab = "Log Mean Expression Value", 
+     ylab = "Frequency", 
+     col = "blue", 
+     border = "black", 
+     breaks = 30)
+
+```
+
+## Tree Growth Data
+
+### Question 6
+
+We imported the file using read.csv and assigned it to the variable "growth_data_raw". The column names are: "Site", "TreeID", "Circumf_2005_cm", "Circumf_2010_cm", "Circumf_2015_cm", and "Circumf_2020_cm".
+
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+growth_data_raw <- read.csv(URL)
+colnames(growth_data_raw)
+```
+
+### Question 7
+We filtered data for "northeast" and "southeast" sites, selecting circumference data for 2005 and 2020. We then created the "northeast_results_task7" dataframe with mean and standard deviation calculated using mean and sd.
+
+```{r}
+northeast_data <- growth_data_raw[growth_data_raw$Site == "northeast", ] #Subsetting all the northeast data
+southwest_data <- growth_data_raw[growth_data_raw$Site == "southwest", ] #Subsetting all the southwest data
+
+northeast_data_task7 <- northeast_data[, c("Circumf_2005_cm", "Circumf_2020_cm")] #Subsetting the start (2005) and end (2020) for northeast
+southwest_data_task7 <- southwest_data[, c("Circumf_2005_cm", "Circumf_2020_cm")] #Subsetting the start (2005) and end (2020) for southwest
+
+northeast_results_task7 <- data.frame(
+  Site = "northeast",  # Keep the site name in the first column
+  mean_circumf_2005 = mean(northeast_data_task7$Circumf_2005_cm, na.rm = TRUE),
+  sd_circumf_2005 = sd(northeast_data_task7$Circumf_2005_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(northeast_data_task7$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(northeast_data_task7$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Avoid converting strings to factors
+)
+
+
+southwest_results_task7 <- data.frame(
+  Site = "southwest",  # Keep the site name in the first column
+  mean_circumf_2005 = mean(southwest_data_task7$Circumf_2005_cm, na.rm = TRUE),
+  sd_circumf_2005 = sd(southwest_data_task7$Circumf_2005_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(southwest_data_task7$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(southwest_data_task7$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Avoid converting strings to factors
+)
+
+northeast_results_task7
+
+southwest_results_task7
+```
+
+### Question 8
+We extended the previous data by adding a site identifier for merging, then merged it into "combined_data_task8" for plotting. Separate boxplots were made for each year due to large magnitude differences, which would obscure data variation.
+
+```{r}
+# Create data for northeast site
+northeast_task_8 <- data.frame(
+  Circumference = c(northeast_data_task7$Circumf_2005_cm, northeast_data_task7$Circumf_2020_cm),
+  Year = rep(c("2005", "2020"), each = nrow(northeast_data)),
+  Site = "northeast"
+)
+
+# Create data for southwest site
+southwest_task_8 <- data.frame(
+  Circumference = c(southwest_data$Circumf_2005_cm, southwest_data$Circumf_2020_cm),
+  Year = rep(c("2005", "2020"), each = nrow(southwest_data)),
+  Site = "southwest"
+)
+
+# Combine the data into a single data frame for plotting purposes
+combined_data_task8 <- rbind(northeast_task_8, southwest_task_8)
+
+# Create a separate plot for 2005
+boxplot(Circumference ~ Site,
+        data = combined_data_task8[combined_data_task8$Year == "2005", ],
+        main = "Tree Circumference in 2005 by Site",
+        xlab = "Site",
+        ylab = "Circumference (cm)",
+        col = "lightblue",
+        las = 1)
+
+# Create a separate plot for 2020
+boxplot(Circumference ~ Site,
+        data = combined_data_task8[combined_data_task8$Year == "2020", ],
+        main = "Tree Circumference in 2020 by Site",
+        xlab = "Site",
+        ylab = "Circumference (cm)",
+        col = "lightgreen",
+        las = 1)
+```
+
+### Question 9
+We subsetted the data for northeast and southwest, focusing on 2010 and 2020 to analyze growth over the last 10 years. After calculating the mean for each year, we computed the mean growth by subtracting the 2010 mean from 2020.
+
+```{r}
+northeast_data_task9 <- northeast_data[, c("Circumf_2010_cm", "Circumf_2020_cm")] # Subset the 2010 and 2020 data for northeast
+southwest_data_task9 <- southwest_data[, c("Circumf_2010_cm", "Circumf_2020_cm")]# Subset the 2010 and 2020 data for southwest
+
+northeast_results_task9 <- data.frame(
+  Site = "northeast",  # Keep the site name in the first column
+  mean_circumf_2010 = mean(northeast_data_task9$Circumf_2010_cm, na.rm = TRUE),
+  sd_circumf_2010 = sd(northeast_data_task9$Circumf_2010_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(northeast_data_task9$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(northeast_data_task9$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Don't make strings as factors, because we have site name
+)
+
+southwest_results_task9 <- data.frame(
+  Site = "southwest",  # Keep the site name in the first column
+  mean_circumf_2010 = mean(southwest_data_task9$Circumf_2010_cm, na.rm = TRUE),
+  sd_circumf_2010 = sd(southwest_data_task9$Circumf_2010_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(southwest_data_task9$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(southwest_data_task9$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Don't make strings as factors, because we have site name
+)
+
+Mean_Growth_northeast_10y <- northeast_results_task9$mean_circumf_2020 - northeast_results_task9$mean_circumf_2010 # Subtraction of 2020 and 2010 mean data
+Mean_Growth_southwest_10y <- southwest_results_task9$mean_circumf_2020 - southwest_results_task9$mean_circumf_2010 # Subtraction of 2020 and 2010 mean data
+
+# Display the results
+Mean_Growth_northeast_10y
+Mean_Growth_southwest_10y
+```
+The mean growth at the northeast site over the last 10 years was: 42.94 cm, while it was 35.49cm for southwest.
+
+### Question 10
+For the t-test, we checked the variance using sd, finding it unequal. Thus, a Welch t-test was applied, yielding p = 0.06229, which is not statistically significant (p > 0.05). There was no significant difference in 10-year growth between the sites.
+
+```{r}
+# Create the data set for this task, done via subtracting the 2020 data from the 2010 data for growth over 10 years
+northeast_data_task10 <- data.frame(
+  Growth_10yr = northeast_data_task9$Circumf_2020_cm - northeast_data_task9$Circumf_2010_cm)
+
+southwest_data_task10 <- data.frame(
+  Growth_10yr = southwest_data_task9$Circumf_2020_cm - southwest_data_task9$Circumf_2010_cm)
+
+# Check if sd is the same, if they are not, then variances are not the same for t-test
+sd(northeast_data_task10$Growth_10yr)
+sd(southwest_data_task10$Growth_10yr)
+
+# Assign t.test to a variable and print the results
+t_test_result <- t.test(northeast_data_task10$Growth_10yr, southwest_data_task10$Growth_10yr)
+print(t_test_result)
+```
+
+
+

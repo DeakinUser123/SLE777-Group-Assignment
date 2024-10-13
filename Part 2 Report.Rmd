@@ -1,5 +1,5 @@
 ---
-title: "Part_2_Report"
+title: "Part 2 Report"
 date: "2024-10-13"
 output: html_document
 ---
@@ -141,6 +141,7 @@ barplot(cbaratii_dna_composition,
         main="C.baratii nucleotide composition",
         names.arg=toupper(names(ecoli_dna_composition))) 
 ```
+
 From the barplots we can see that, E. coli has relatively balanced nucleotides (Adenine, Guanine, Cytosine and Thymine) with a slight bias towards Guanine. C. baratii is skewed towards nucleotide Adenine and Thymine, with lower counts of Cytosine and Guanine.
 
 
@@ -196,6 +197,7 @@ barplot(amino_acid_counts_cbaratii,
         ylab = "Frequency",
         main = "Amino Acid Composition in C.baratii")
 ```
+
 From the barplots we can see that, the amino acid compositions of E. coli and C. baratii is relatively similar. However, E. coli uses Alanine, Leucine and Glycine the most, whereas C. baratii uses Isoleucine, lysine and Leucine the most.
 
 ### Question 5
