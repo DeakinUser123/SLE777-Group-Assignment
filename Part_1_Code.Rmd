@@ -1,0 +1,202 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes
+
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/gene_expression.tsv"  
+gene_expression_raw <- read.table(URL,stringsAsFactors = FALSE, header=TRUE, row.names=1)  #Reading the URL and formatting it correctly
+head(gene_expression_raw)
+```
+
+2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
+
+```{r}
+gene_expression <- gene_expression_raw #Create a new data set to modify, leave the original
+gene_expression$Mean_Expression <- rowMeans(gene_expression_raw, na.rm = TRUE) #Finding the means of the rows, remove the empty values
+head(gene_expression)
+```
+
+3.  List the 10 genes with the highest mean expression
+
+```{r}
+sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
+head(sorted_gene_expression,10) #Show the first 10 genes in the sorted table
+```
+
+
+4. Determine the number of genes with a mean <10
+```{r}
+sum(sorted_gene_expression$Mean_Expression <10)  #Use sum function which counts the number of TRUE expressions, each row with Mean_Expression less than 10 will be TRUE
+```
+
+5. Make a histogram plot of the mean values
+
+```{r}
+# histogram
+hist(gene_expression$Mean_Expression, xlab = "Mean Expression", main = "Histogram of Gene Expression Means")
+```
+
+Issue is we cannot see all the data, I think its best to log transform it
+
+```{r}
+# Log transformation of Mean values
+log_means <- log(gene_expression$Mean_Expression + 1)
+
+# Create a histogram using the transformed data
+hist(log_means, 
+     main = "Histogram of Log-transformed Mean Gene Expression Values", 
+     xlab = "Log Mean Expression Value", 
+     ylab = "Frequency", 
+     col = "blue", 
+     border = "black", 
+     breaks = 30)
+```
+
+
+6. Import this csv file into an R object. What are the column names?
+
+```{r}
+URL= "https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+growth_data_raw <- read.csv(URL) #Read the csv from the URL 
+colnames(growth_data_raw) #Get the column names of "growth_data_raw"
+```
+
+7. Calculate the mean and standard deviation of tree circumference at the start and end of the study at both sites
+
+
+```{r}
+northeast_data <- growth_data_raw[growth_data_raw$Site == "northeast", ]
+
+southwest_data <- growth_data_raw[growth_data_raw$Site == "southwest", ]
+
+northeast_data_task7 <- northeast_data[, c("Circumf_2005_cm", "Circumf_2020_cm")]
+
+southwest_data_task7 <- southwest_data[, c("Circumf_2005_cm", "Circumf_2020_cm")]
+
+#Calculate Means for Northeast
+mean(northeast_data_task7$Circumf_2005_cm, na.rm = TRUE)
+mean(northeast_data_task7$Circumf_2020_cm, na.rm = TRUE)
+#Calculate SD for Northeast
+sd(northeast_data_task7$Circumf_2005_cm,na.rm=TRUE)
+sd(northeast_data_task7$Circumf_2020_cm,na.rm=TRUE)
+
+#Calculate Means for Southwest
+ mean(southwest_data_task7$Circumf_2005_cm, na.rm = TRUE)
+mean(southwest_data_task7$Circumf_2020_cm, na.rm = TRUE)
+#Calculate SD for Southwest
+sd(southwest_data_task7$Circumf_2005_cm,na.rm=TRUE)
+sd(southwest_data_task7$Circumf_2020_cm,na.rm=TRUE)
+
+#Turn it into a data frame for northeast
+northeast_results_task7 <- data.frame(
+  Site = "northeast",  # Keep the site name in the first column
+  mean_circumf_2005 = mean(northeast_data_task7$Circumf_2005_cm, na.rm = TRUE),
+  sd_circumf_2005 = sd(northeast_data_task7$Circumf_2005_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(northeast_data_task7$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(northeast_data_task7$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Avoid converting strings to factors
+)
+
+#Turn it into a data frame for southwest
+southwest_results_task7 <- data.frame(
+  Site = "southwest",  # Keep the site name in the first column
+  mean_circumf_2005 = mean(southwest_data_task7$Circumf_2005_cm, na.rm = TRUE),
+  sd_circumf_2005 = sd(southwest_data_task7$Circumf_2005_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(southwest_data_task7$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(southwest_data_task7$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE # Avoid converting strings to factors
+)
+
+northeast_results_task7 # Show the results table for northeast
+southwest_results_task7 # Show the results table for southwest
+```
+
+8. Make a box plot of tree circumference at the start and end of the study at both sites.
+
+```{r}
+northeast_task_8 <- data.frame(
+  Circumference = c(northeast_data_task7$Circumf_2005_cm, northeast_data_task7$Circumf_2020_cm),
+  Year = rep(c("2005", "2020"), each = nrow(northeast_data)),
+  Site = "northeast"
+)
+
+# Create data for southwest site
+southwest_task_8 <- data.frame(
+  Circumference = c(southwest_data$Circumf_2005_cm, southwest_data$Circumf_2020_cm),
+  Year = rep(c("2005", "2020"), each = nrow(southwest_data)),
+  Site = "southwest"
+)
+
+# Combine the data into a single data frame for plotting purposes
+combined_data_task8 <- rbind(northeast_task_8, southwest_task_8)
+
+# Create a separate plot for 2005
+boxplot(Circumference ~ Site,
+        data = combined_data_task8[combined_data_task8$Year == "2005", ],
+        main = "Tree Circumference in 2005 by Site",
+        xlab = "Site",
+        ylab = "Circumference (cm)",
+        col = "lightblue",
+        las = 1)
+
+# Create a separate plot for 2020
+boxplot(Circumference ~ Site,
+        data = combined_data_task8[combined_data_task8$Year == "2020", ],
+        main = "Tree Circumference in 2020 by Site",
+        xlab = "Site",
+        ylab = "Circumference (cm)",
+        col = "lightgreen",
+        las = 1)
+```
+9. Calculate the mean growth over the last 10 years at each site
+
+```{r}
+northeast_data_task9 <- northeast_data[, c("Circumf_2010_cm", "Circumf_2020_cm")] # Subset the 2010 and 2020 data for northeast
+southwest_data_task9 <- southwest_data[, c("Circumf_2010_cm", "Circumf_2020_cm")] # Subset the 2010 and 2020 data for southwest
+
+northeast_results_task9 <- data.frame(
+  Site = "northeast",  # Keep the site name in the first column
+  mean_circumf_2010 = mean(northeast_data_task9$Circumf_2010_cm, na.rm = TRUE),
+  sd_circumf_2010 = sd(northeast_data_task9$Circumf_2010_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(northeast_data_task9$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(northeast_data_task9$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE #Don't make strings as factors, because we have site name
+)
+
+southwest_results_task9 <- data.frame(
+  Site = "southwest",  # Keep the site name in the first column
+  mean_circumf_2010 = mean(southwest_data_task9$Circumf_2010_cm, na.rm = TRUE),
+  sd_circumf_2010 = sd(southwest_data_task9$Circumf_2010_cm,na.rm=TRUE),
+  mean_circumf_2020 = mean(southwest_data_task9$Circumf_2020_cm, na.rm = TRUE),
+  sd_circumf_2020 = sd(southwest_data_task9$Circumf_2020_cm,na.rm=TRUE),
+  stringsAsFactors = FALSE #Don't make strings as factors, because we have site name
+)
+
+Mean_Growth_northeast_10y <- northeast_results_task9$mean_circumf_2020 - northeast_results_task9$mean_circumf_2010 # Subtraction of 2020 and 2010 mean data
+Mean_Growth_southwest_10y <- southwest_results_task9$mean_circumf_2020 - southwest_results_task9$mean_circumf_2010 # Subtraction of 2020 and 2010 mean data
+
+#Display the mean growth results for each site
+Mean_Growth_northeast_10y
+Mean_Growth_southwest_10y
+```
+10. Use the t.test to estimate the p-value that the 10 year growth is different at the two sites.
+
+```{r}
+#Create the data set for this task, done via subtracting the 2020 data from the 2010 data for growth over 10 years and put it into a table
+northeast_data_task10 <- data.frame(
+  Growth_10yr = northeast_data_task9$Circumf_2020_cm - northeast_data_task9$Circumf_2010_cm)
+
+southwest_data_task10 <- data.frame(
+  Growth_10yr = southwest_data_task9$Circumf_2020_cm - southwest_data_task9$Circumf_2010_cm)
+
+#Check if sd is the same, if they are not, then variances are not the same for t-test
+sd(northeast_data_task10$Growth_10yr)
+sd(southwest_data_task10$Growth_10yr)
+
+#Assign t.test to a variable and print the results
+t_test_result <- t.test(northeast_data_task10$Growth_10yr, southwest_data_task10$Growth_10yr) # Using a t-test 
+print(t_test_result) # Printing the results 
+```
+
