@@ -25,14 +25,11 @@ head(gene_expression)
 
 
 ### Question 3
-
 To approach this, we used the order function, and use - prefix to indicate decreasing order of Mean_Expression, then took the first 10 using head. The 10 genes are summarised in the table below:
 ```{r}
 sorted_gene_expression <- gene_expression[order(-gene_expression$Mean_Expression), ] #Using the order function, sort the Mean expression in decreasing order
 head(sorted_gene_expression, 10) #Show the first 10
 ```
-
-
 
 ### Question 4
 We first filtered genes with a mean expression less than 10, then summed the number of TRUE values.
@@ -40,15 +37,35 @@ We first filtered genes with a mean expression less than 10, then summed the num
 sum(sorted_gene_expression$Mean_Expression <10) #Use sum function which counts the number of TRUE expressions, each row with Mean_Expression less than 10 will be TRUE
 ```
 We found that A total of 35,988 genes have a mean expression less than 10.
-
-
-
-
-
 ### Question 5
 
+We used hist to plot the frequency of mean expression values. Due to magnitude differences, we applied a log transformation (log(mean expression + 1)) to better visualize trends.
+
+```{r}
+# Log transformation of Mean values, avoiding log(0) issues
+log_means <- log(gene_expression$Mean_Expression + 1)
+# Create a histogram of the log-transformed Mean values
+hist(log_means, 
+     main = "Histogram of Log-transformed Mean Gene Expression Values", 
+     xlab = "Log Mean Expression Value", 
+     ylab = "Frequency", 
+     col = "blue", 
+     border = "black", 
+     breaks = 30)
+
+```
+
+## Tree Growth Data
 
 ### Question 6
+
+We imported the file using read.csv and assigned it to the variable "growth_data_raw". The column names are: "Site", "TreeID", "Circumf_2005_cm", "Circumf_2010_cm", "Circumf_2015_cm", and "Circumf_2020_cm".
+
+```{r}
+URL="https://raw.githubusercontent.com/ghazkha/Assessment4/refs/heads/main/growth_data.csv"
+growth_data_raw <- read.csv(URL)
+colnames(growth_data_raw)
+```
 
 
 ### Question 7
