@@ -6,7 +6,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+## Gene Expression Task
 ### Question 1
 To approach this, we have a tsv file, first column and row are the names, so we must account for that using header and row.names. The tsv is read and assigned to a variable for easy usage.
 ```{r}
@@ -37,6 +37,7 @@ We first filtered genes with a mean expression less than 10, then summed the num
 sum(sorted_gene_expression$Mean_Expression <10) #Use sum function which counts the number of TRUE expressions, each row with Mean_Expression less than 10 will be TRUE
 ```
 We found that A total of 35,988 genes have a mean expression less than 10.
+
 ### Question 5
 
 We used hist to plot the frequency of mean expression values. Due to magnitude differences, we applied a log transformation (log(mean expression + 1)) to better visualize trends.

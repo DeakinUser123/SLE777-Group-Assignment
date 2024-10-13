@@ -464,3 +464,5 @@ ggplot(cbaratii_kmer_5, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 ```
+
+From the plot, we see that the under-represented k-mers of length 3,4,5 are similar for both organisms. This may be because the aminoacids that it encodes for may not be necessary for bacteria to survive. However, the overrepresented k-mers for all lengths are different between E. coli and C. baratii, they are very different species, so need different expressions for different environments and tasks.
