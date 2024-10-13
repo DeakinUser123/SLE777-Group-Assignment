@@ -112,7 +112,6 @@ From the boxplot, C. baratii has a lower median than E. coli. They have similar 
 
 
 ### Question 4
-
 We counted the nucleotide frequencies for both E. coli and C. baratii, stored them as numeric vectors, and visualized them with bar plots. Then, we translated the coding sequences into amino acids, calculated the frequency of each amino acid, and plotted the amino acid composition for both organisms in separate bar plots.
 
 ```{r}
@@ -142,7 +141,7 @@ barplot(cbaratii_dna_composition,
         main="C.baratii nucleotide composition",
         names.arg=toupper(names(ecoli_dna_composition))) 
 ```
-From the barplot we can see that, E. coli has more uniform distribution of nucleotides (Adenine, Guanine, Cytosine and Thymine) while C. baratii shows more random distribution and a high frequency of A and low frequency of C.
+From the barplots we can see that, E. coli has relatively balanced nucleotides (Adenine, Guanine, Cytosine and Thymine) with a slight bias towards Guanine. C. baratii is skewed towards nucleotide Adenine and Thymine, with lower counts of Cytosince and Guanine.
 
 
 We then translate to amino acids
@@ -197,7 +196,7 @@ barplot(amino_acid_counts_cbaratii,
         ylab = "Frequency",
         main = "Amino Acid Composition in C.baratii")
 ```
-From the barplot we can see that, the amino acid compositions of E. coli and C. baratii reveal notable differences, as E. coli displays greater frequencies of leucine (L) and alanine (A), while C. baratii shows a peak in isoleucine (I). Although both organisms contain similar amino acids, E. coli demonstrates a broader range of frequencies.
+From the barplots we can see that, the amino acid compositions of E. coli and C. baratii is relatively similar. However, E. coli uses Alanine, Leucine and Glycine the most, whereas C. baratii uses Isoleucine, lysine and Leucine the most.
 
 ### Question 5
 We used UCO to calculate RSCU values for codons, formatted as a dataframe, added an organism column, and combined datasets for plotting. The data was split into two groups for clearer plots.
