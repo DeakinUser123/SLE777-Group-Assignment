@@ -141,7 +141,7 @@ barplot(cbaratii_dna_composition,
         main="C.baratii nucleotide composition",
         names.arg=toupper(names(ecoli_dna_composition))) 
 ```
-From the barplots we can see that, E. coli has relatively balanced nucleotides (Adenine, Guanine, Cytosine and Thymine) with a slight bias towards Guanine. C. baratii is skewed towards nucleotide Adenine and Thymine, with lower counts of Cytosince and Guanine.
+From the barplots we can see that, E. coli has relatively balanced nucleotides (Adenine, Guanine, Cytosine and Thymine) with a slight bias towards Guanine. C. baratii is skewed towards nucleotide Adenine and Thymine, with lower counts of Cytosine and Guanine.
 
 
 We then translate to amino acids
