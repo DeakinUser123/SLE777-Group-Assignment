@@ -70,7 +70,6 @@ Coding_DNA_Table
 E. coli has more total coding DNA than C. baratii (3978528 > 2698779)
 
 ### Question 3
-
 We calculated lengths with summary, converted to numeric vectors, and stored them in a dataframe for plotting. We also calculated mean and median with the mean and median functions.
 ```{r}
 len_ecoli <- as.numeric(summary(cds_ecoli)[,1]) # Gets the length of all sequences from the first column
@@ -114,6 +113,91 @@ From the boxplot, C. baratii has a lower median than E. coli. They have similar 
 
 ### Question 4
 
+We counted the nucleotide frequencies for both E. coli and C. baratii, stored them as numeric vectors, and visualized them with bar plots. Then, we translated the coding sequences into amino acids, calculated the frequency of each amino acid, and plotted the amino acid composition for both organisms in separate bar plots.
+
+```{r}
+count(unlist(cds_ecoli),1)
+count(unlist(cds_Cbaratii),1)
+```
+
+
+a. E. coli
+```{r}
+#Unlist the entire E.coli sequence, then count each nucleotide and store
+ecoli_dna_composition <- count(unlist(cds_ecoli),1) 
+
+# Bar plot of E.coli nucleotide frequency
+barplot(ecoli_dna_composition,xlab="Nucleotides",ylab="Frequency", main="E.coli nucleotide composition", names.arg=toupper(names(ecoli_dna_composition)))
+```
+
+b. C. baratii
+```{r}
+#Unlist the entire C.baratii sequence, then count each nucleotide and store
+cbaratii_dna_composition <- count(unlist(cds_Cbaratii),1) 
+
+#Bar plot of C.baratii nucleotide frequency
+barplot(cbaratii_dna_composition,
+        xlab="Nucleotides",
+        ylab="Frequency", 
+        main="C.baratii nucleotide composition",
+        names.arg=toupper(names(ecoli_dna_composition))) 
+```
+From the barplot we can see that, E. coli has more uniform distribution of nucleotides (Adenine, Guanine, Cytosine and Thymine) while C. baratii shows more random distribution and a high frequency of A and low frequency of C.
+
+
+We then translate to amino acids
+```{r}
+ #Translate the sequences to aminoacids
+prot_ecoli <- lapply(cds_ecoli,translate)
+prot_cbaratii <- lapply(cds_Cbaratii,translate)
+```
+
+E. coli
+```{r}
+# Combine all protein sequences into a single vector
+prot_ecoli_all<- unlist(prot_ecoli) 
+
+# Define the alphabet as the unique amino acids found in the proteins
+aa1 <- unique(prot_ecoli_all[prot_ecoli_all != "*"]) 
+
+# Count occurrences of each amino acid in the combined sequence
+amino_acid_counts_ecoli <- count(prot_ecoli_all, wordsize = 1, alphabet = aa1)
+```
+
+
+Now create a Barplot of Ecoli 
+
+```{r}
+# barplot of E.coli for amino acid frequency
+barplot(amino_acid_counts_ecoli,
+        xlab = "Amino Acids",
+        ylab = "Frequency",
+        main = "Amino Acid Composition in E.coli")
+```
+
+ C. baratii
+ 
+```{r}
+# Combine all protein sequences into a single vector
+prot_cbaratii_all<- unlist(prot_cbaratii)
+
+# Define the alphabet as the unique amino acids found in the proteins
+aa2 <- unique(prot_cbaratii_all[prot_cbaratii_all != "*"])
+
+# Count occurrences of each amino acid in the combined sequence
+amino_acid_counts_cbaratii <- count(prot_cbaratii_all, wordsize = 1, alphabet = aa2)
+```
+ 
+Now create a barplot for C. baratii
+ 
+```{r}
+# barplot of C.baratii for amino acid frequency
+barplot(amino_acid_counts_cbaratii,
+        xlab = "Amino Acids",
+        ylab = "Frequency",
+        main = "Amino Acid Composition in C.baratii")
+```
+From the barplot we can see that, the amino acid compositions of E. coli and C. baratii reveal notable differences, as E. coli displays greater frequencies of leucine (L) and alanine (A), while C. baratii shows a peak in isoleucine (I). Although both organisms contain similar amino acids, E. coli demonstrates a broader range of frequencies.
 
 ### Question 5
 We used UCO to calculate RSCU values for codons, formatted as a dataframe, added an organism column, and combined datasets for plotting. The data was split into two groups for clearer plots.
