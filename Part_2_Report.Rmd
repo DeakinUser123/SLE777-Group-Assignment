@@ -38,6 +38,7 @@ download.file(URL1,destfile="ecoli_cds.fa.gz")
 gunzip("ecoli_cds.fa.gz") # Unzips the gz file
 list.files() #Displays all the files, to see if it successfully occurred
 ```
+
 ```{r}
 # Downloading the data for C. baratii, run if you do not have the files
 URL2="https://ftp.ensemblgenomes.ebi.ac.uk/pub/bacteria/release-59/fasta/bacteria_14_collection/clostridium_baratii_gca_001405755/cds/Clostridium_baratii_gca_001405755.14207_7_79.cds.all.fa.gz"
@@ -51,12 +52,14 @@ We read the FASTA files using seqinr::read.fasta and stored them in variables
 cds_ecoli <- seqinr::read.fasta("ecoli_cds.fa") # Sets the read file into a variable
 cds_Cbaratii <- seqinr:: read.fasta("Cbaratii_cds.fa") # Sets the read file into a variable
 ```
+
+
 To count the coding sequences, we applied length to the FASTA data and created a dataframe for comparison.
 ```{r}
 sequences_table <- data.frame(Organism= c("Escherichia coli", "Clostridium baratii"), Num_Coding_Sequences= c(length(cds_ecoli),length(cds_Cbaratii)))
 sequences_table #View the dataframe 
 ```
-We found that E. coli has more coding sequences than C. baratii (4239 > 2931).
+E. coli has more coding sequences than C. baratii (4239 > 2931).
 
 ### Question 2
 We created "Coding_DNA_Table", a dataframe with organisms and total coding DNA, using sum and length on unlisted sequences. Unlisting is required to do it on the entire genome.
@@ -113,8 +116,270 @@ From the boxplot, C. baratii has a lower median than E. coli. They have similar 
 
 
 ### Question 5
+We used UCO to calculate RSCU values for codons, formatted as a dataframe, added an organism column, and combined datasets for plotting. The data was split into two groups for clearer plots.
 
+```{r}
+# Creating the codon usage tables 
+# Finds all unique codons and their RSCU and puts them into a variable 
+ecoli_codon_bias <- uco(unlist(cds_ecoli[]), index="rscu", as.data.frame=TRUE)
+cbaratii_codon_bias <- uco(unlist(cds_Cbaratii[]), index="rscu", as.data.frame=TRUE)
 
+ecoli_codon_bias
+cbaratii_codon_bias
+```
+
+```{r}
+# Creating the useful charts for data analysis
+
+# Add new column called Organism and assign respective organism
+ecoli_codon_bias$Organism <- "E. coli"
+cbaratii_codon_bias$Organism <- "C. baratii"
+
+# Combining the two data sets for plotting
+combined_codon_bias <- rbind(ecoli_codon_bias, cbaratii_codon_bias)
+
+# Ensuring column names are correct
+colnames(combined_codon_bias) <- c("codon", "AA", "eff", "freq", "RSCU", "Organism")
+
+# Format for the heatmap
+heatmap_data <- combined_codon_bias[, c("AA", "Organism", "RSCU")]
+heatmap_data$CodonGroup <- ifelse(as.numeric(factor(heatmap_data$AA)) <= 32, "First 32 Codons", "Second 32 Codons")
+
+# Create the heatmap
+ggplot(heatmap_data, aes(x = toupper(AA), y = Organism, fill = RSCU)) +
+  geom_tile() + 
+  scale_fill_gradient(low="white", high="red", name = "RSCU") +
+  labs(title = "Codon Usage Heatmap for E. coli and C. baratii",
+       x = "Codon",
+       y = "Organism") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.3, hjust = 1), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.text = element_blank(),
+    aspect.ratio = 0.1,
+    panel.spacing = unit(1, "lines")
+  ) +
+  facet_wrap(~ CodonGroup, nrow = 2, scales = "free_x") #Turns it into 2 graphs
+
+# Create a Barchart
+ggplot(heatmap_data, aes(x = toupper(AA), y = RSCU, fill = Organism)) + # "toupper" upper-cases the codons 
+  geom_bar(stat = "identity", position = "dodge",width = 1) + 
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) + 
+  labs(title = "Codon Usage Bias by Codon", x = "Codon", y = "RSCU") + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust=0.3, hjust = 1)) +
+  facet_wrap(~ CodonGroup, nrow = 2, scales = "free_x") # Turns it into 2 graphs
+```
+From the heatmap and the barchart, we see that there are very large differences in Codon usage. E.coli expresses basically every codon, whereas C. baratii expresses little or none for certain codons such as CGG. C. baratii also has a preference for codon AGA
 
 ### Question 6
+We used count with freq=TRUE to get k-mer (lengths 3-5) frequencies, sorted them, created data tables, and plotted barplots using ggplot. Smaller frequencies were adjusted for better visualization (Length 3 and 4)
 
+```{r}
+# Creating the length 3,4 and 5 K-mers for E.coli and C.baratii
+freq_ecoli_3 <- count(prot_ecoli_all,wordsize=3,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 3
+freq_ecoli_4 <- count(prot_ecoli_all,wordsize=4,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 4
+freq_ecoli_5 <- count(prot_ecoli_all,wordsize=5,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 5
+
+freq_cbaratii_3 <- count(prot_cbaratii_all,wordsize=3,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 3
+freq_cbaratii_4 <- count(prot_cbaratii_all,wordsize=4,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 4
+freq_cbaratii_5 <- count(prot_cbaratii_all,wordsize=5,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 5
+```
+
+```{r}
+# Sorting the K-mers by frequency for C.baratii
+top_overrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_cbaratii_3)
+print(bottom_underrepresented_cbaratii_3)
+
+top_overrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_cbaratii_4)
+print(bottom_underrepresented_cbaratii_4)
+
+top_overrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_cbaratii_5)
+print(bottom_underrepresented_cbaratii_5)
+
+```
+
+
+```{r}
+# Sorting the K-mers by frequency for E. coli
+top_overrepresented_ecoli_3 <- head(sort(freq_ecoli_3, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_ecoli_3 <- head(sort(freq_ecoli_3), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_ecoli_3)
+print(bottom_underrepresented_ecoli_3)
+
+top_overrepresented_ecoli_4 <- head(sort(freq_ecoli_4, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_ecoli_4 <- head(sort(freq_ecoli_4), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_ecoli_4)
+print(bottom_underrepresented_ecoli_4)
+
+top_overrepresented_ecoli_5 <- head(sort(freq_ecoli_5, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
+
+bottom_underrepresented_ecoli_5 <- head(sort(freq_ecoli_5), 10) # Sort the frequencies in increasing order, take the top 10
+
+print(top_overrepresented_ecoli_5)
+print(bottom_underrepresented_ecoli_5)
+```
+
+Creating the data for plotting 
+```{r}
+
+# Data for E. coli length 3
+ecoli_kmer_3 <- data.frame(
+  kmer = names(c(top_overrepresented_ecoli_3, bottom_underrepresented_ecoli_3)),
+  frequency = c(top_overrepresented_ecoli_3, bottom_underrepresented_ecoli_3),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "E. coli",
+  Length = 3
+)
+
+# Data for E. coli length 4
+ecoli_kmer_4 <- data.frame(
+  kmer = names(c(top_overrepresented_ecoli_4, bottom_underrepresented_ecoli_4)),
+  frequency = c(top_overrepresented_ecoli_4, bottom_underrepresented_ecoli_4),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "E. coli",
+  Length = 4
+)
+
+# Data for E. coli length 5
+ecoli_kmer_5 <- data.frame(
+  kmer = names(c(top_overrepresented_ecoli_5, bottom_underrepresented_ecoli_5)),
+  frequency = c(top_overrepresented_ecoli_5, bottom_underrepresented_ecoli_5),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "E. coli",
+  Length = 5
+)
+
+# Now do the same for C. baratii
+# Data for C. baratii length 3
+cbaratii_kmer_3 <- data.frame(
+  kmer = names(c(top_overrepresented_cbaratii_3, bottom_underrepresented_cbaratii_3)),
+  frequency = c(top_overrepresented_cbaratii_3, bottom_underrepresented_cbaratii_3),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "C. baratii",
+  Length = 3
+)
+
+# Data for C. baratii length 4
+cbaratii_kmer_4 <- data.frame(
+  kmer = names(c(top_overrepresented_cbaratii_4, bottom_underrepresented_cbaratii_4)),
+  frequency = c(top_overrepresented_cbaratii_4, bottom_underrepresented_cbaratii_4),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "C. baratii",
+  Length = 4
+)
+
+# Data for C. baratii length 5
+cbaratii_kmer_5 <- data.frame(
+  kmer = names(c(top_overrepresented_cbaratii_5, bottom_underrepresented_cbaratii_5)),
+  frequency = c(top_overrepresented_cbaratii_5, bottom_underrepresented_cbaratii_5),
+  type = c(rep("Overrepresented", 10), rep("Underrepresented", 10)),
+  Organism = "C. baratii",
+  Length = 5
+)
+
+# Combine all into one data frame 
+all_kmers <- rbind(ecoli_kmer_3, ecoli_kmer_4, ecoli_kmer_5,
+                   cbaratii_kmer_3, cbaratii_kmer_4, cbaratii_kmer_5)
+
+```
+
+
+Plot adjusted frequency for Length 3 K-mers
+```{r}
+# Add a small constant to all frequencies
+ecoli_kmer_3$adjusted_frequency <- ecoli_kmer_3$frequency + 0.00001 # Because the bottom 10 look like 0 but are not
+
+ggplot(ecoli_kmer_3, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 3)",
+       x = "K-mer",
+       y = "Frequency (Adjusted)") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+cbaratii_kmer_3$adjusted_frequency <- cbaratii_kmer_3$frequency + 0.00001 # Because the bottom 10 look like 0 but are not
+
+ggplot(cbaratii_kmer_3, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 3)",
+       x = "K-mer",
+       y = "Frequency (Adjusted)") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```
+
+Plot adjusted frequency for Length 4 K-mers
+```{r}
+# Add a small constant to all frequencies
+ecoli_kmer_4$adjusted_frequency <- ecoli_kmer_4$frequency + 0.0001
+
+ggplot(ecoli_kmer_4, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 4)",
+       x = "K-mer",
+       y = "Frequency (Adjusted)") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+cbaratii_kmer_4$adjusted_frequency <- cbaratii_kmer_4$frequency + 0.0001
+
+ggplot(cbaratii_kmer_4, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 4)",
+       x = "K-mer",
+       y = "Frequency (Adjusted)") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```
+
+Plot unadjusted graphs for length 5 k-mers
+```{r}
+# Add a small constant to all frequencies
+ecoli_kmer_5$adjusted_frequency <- ecoli_kmer_5$frequency + 0 # We do not adjust the frequency here
+
+ggplot(ecoli_kmer_5, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 5)",
+       x = "K-mer",
+       y = "Frequency ") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+cbaratii_kmer_5$adjusted_frequency <- cbaratii_kmer_5$frequency + 0 # We do not adjust the frequency here
+
+ggplot(cbaratii_kmer_5, aes(x = reorder(kmer, adjusted_frequency), y = adjusted_frequency, fill = Organism)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
+  labs(title = "Top 10 Overrepresented K-mers (Length 5)",
+       x = "K-mer",
+       y = "Frequency ") +
+  scale_fill_manual(values = c("E. coli" = "blue", "C. baratii" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```

@@ -261,63 +261,66 @@ ggplot(heatmap_data, aes(x = toupper(AA), y = RSCU, fill = Organism)) + # "toupp
 
 Creating the length 3,4 and 5 K-mers for E.coli and C.baratii
 ```{r}
-freq_ecoli_3 <- count(prot_ecoli_all,wordsize=3,alphabet=aa1,freq=TRUE)
-freq_ecoli_4 <- count(prot_ecoli_all,wordsize=4,alphabet=aa1,freq=TRUE)
-freq_ecoli_5 <- count(prot_ecoli_all,wordsize=5,alphabet=aa1,freq=TRUE)
+freq_ecoli_3 <- count(prot_ecoli_all,wordsize=3,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 3
+freq_ecoli_4 <- count(prot_ecoli_all,wordsize=4,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 4
+freq_ecoli_5 <- count(prot_ecoli_all,wordsize=5,alphabet=aa1,freq=TRUE) # Count the frequency for k-mers length 5
 
-freq_cbaratii_3 <- count(prot_cbaratii_all,wordsize=3,alphabet=aa2,freq=TRUE)
-freq_cbaratii_4 <- count(prot_cbaratii_all,wordsize=4,alphabet=aa2,freq=TRUE)
-freq_cbaratii_5 <- count(prot_cbaratii_all,wordsize=5,alphabet=aa2,freq=TRUE)
+freq_cbaratii_3 <- count(prot_cbaratii_all,wordsize=3,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 3
+freq_cbaratii_4 <- count(prot_cbaratii_all,wordsize=4,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 4
+freq_cbaratii_5 <- count(prot_cbaratii_all,wordsize=5,alphabet=aa2,freq=TRUE) # Count the frequency for k-mers length 5
 ```
 
 Sorting the K-mers by frequency for C.baratii
 ```{r}
-top_overrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3, decreasing = TRUE), 10)
+top_overrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3), 10)
+bottom_underrepresented_cbaratii_3 <- head(sort(freq_cbaratii_3), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_cbaratii_3)
 print(bottom_underrepresented_cbaratii_3)
 
-top_overrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4, decreasing = TRUE), 10)
+top_overrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4), 10)
+bottom_underrepresented_cbaratii_4 <- head(sort(freq_cbaratii_4), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_cbaratii_4)
 print(bottom_underrepresented_cbaratii_4)
 
-top_overrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5, decreasing = TRUE), 10)
+top_overrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5), 10)
+bottom_underrepresented_cbaratii_5 <- head(sort(freq_cbaratii_5), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_cbaratii_5)
 print(bottom_underrepresented_cbaratii_5)
 
 ```
+
 Sorting the K-mers by frequency for E. coli
 ```{r}
-top_overrepresented_ecoli_3 <- head(sort(freq_ecoli_3, decreasing = TRUE), 10)
+top_overrepresented_ecoli_3 <- head(sort(freq_ecoli_3, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_ecoli_3 <- head(sort(freq_ecoli_3), 10)
+bottom_underrepresented_ecoli_3 <- head(sort(freq_ecoli_3), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_ecoli_3)
 print(bottom_underrepresented_ecoli_3)
 
-top_overrepresented_ecoli_4 <- head(sort(freq_ecoli_4, decreasing = TRUE), 10)
+top_overrepresented_ecoli_4 <- head(sort(freq_ecoli_4, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_ecoli_4 <- head(sort(freq_ecoli_4), 10)
+bottom_underrepresented_ecoli_4 <- head(sort(freq_ecoli_4), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_ecoli_4)
 print(bottom_underrepresented_ecoli_4)
 
-top_overrepresented_ecoli_5 <- head(sort(freq_ecoli_5, decreasing = TRUE), 10)
+top_overrepresented_ecoli_5 <- head(sort(freq_ecoli_5, decreasing = TRUE), 10) # Sort the frequencies in decreasing order, take the top 10
 
-bottom_underrepresented_ecoli_5 <- head(sort(freq_ecoli_5), 10)
+bottom_underrepresented_ecoli_5 <- head(sort(freq_ecoli_5), 10) # Sort the frequencies in increasing order, take the top 10
 
 print(top_overrepresented_ecoli_5)
 print(bottom_underrepresented_ecoli_5)
 ```
+
 Creating the data for plotting 
+
 ```{r}
 
 # Data for E. coli length 3
